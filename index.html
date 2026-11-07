@@ -462,7 +462,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .evo::-webkit-scrollbar{display:none}
 .evo-c{flex:0 0 68%;scroll-snap-align:center;border-radius:20px;padding:18px 12px 14px;text-align:center;border:2px solid color-mix(in srgb,var(--ec) 35%,transparent);background:radial-gradient(120% 90% at 50% 0%,color-mix(in srgb,var(--ec) 26%,transparent),transparent 70%),color-mix(in srgb,var(--bg) 80%,var(--c));opacity:.55;transform:scale(.93);transition:opacity .2s,transform .2s,box-shadow .2s,border-color .2s;cursor:pointer}
 .evo-c.on{opacity:1;transform:none;border-color:var(--ec);box-shadow:0 0 26px color-mix(in srgb,var(--ec) 38%,transparent)}
-.evo-art{font-size:62px;line-height:1.15;filter:drop-shadow(0 6px 16px var(--ec))}
+.evo-art svg{width:100%;max-width:150px}.evo-art{font-size:62px;line-height:1.15;filter:drop-shadow(0 6px 16px var(--ec))}
 .evo-n{font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:700;margin-top:6px;color:var(--t);text-shadow:0 0 14px color-mix(in srgb,var(--ec) 60%,transparent)}
 .evo-s{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--m);margin-top:5px}
 .evo-b{margin-top:14px;padding:9px;border-radius:12px;border:1px solid var(--ec);color:var(--ec);font-weight:700;font-size:13px}
@@ -492,6 +492,41 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .rk-hx{display:flex;flex-direction:column;align-items:center;gap:6px;width:76px;padding:6px 0}
 .rk-hx i{width:11px;height:11px;background:var(--b);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
 .rk-hx i.on{background:var(--a);box-shadow:0 0 8px var(--a)}
+
+/* v18 */
+#ci .ci-box{width:min(94vw,440px);max-height:90vh;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--b);border-radius:22px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+#ci .ci-h{padding:18px 18px 8px}#ci .ci-h h2{margin:0 0 4px;font-size:21px}
+#ci .ci-l{overflow:auto;padding:6px 14px 12px;flex:1;-webkit-overflow-scrolling:touch}
+#ci .ci-it{padding:12px;margin-bottom:10px;border:1px solid var(--b);border-radius:14px;background:color-mix(in srgb,var(--bg,#000) 40%,transparent)}
+#ci .ci-seg{display:flex;gap:8px;margin-top:10px}#ci .ci-seg button{flex:1;padding:11px;border-radius:12px;font-weight:700;opacity:.8}
+#ci .ci-seg button.on-y{background:#16a34a;color:#fff;border-color:#16a34a;opacity:1}#ci .ci-seg button.on-n{background:#dc2626;color:#fff;border-color:#dc2626;opacity:1}
+#ci .ci-f{padding:12px 14px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--b);background:color-mix(in srgb,var(--card) 90%,#000)}
+#ci .ci-go{width:100%;padding:16px;font-size:17px;font-weight:800;border:0;border-radius:16px;background:var(--a);color:#0a0a0a;box-shadow:0 8px 24px color-mix(in srgb,var(--a) 45%,transparent)}
+.kz{text-align:center}.kz-f{position:relative;width:min(62vw,230px);aspect-ratio:268/440;margin:4px auto 0;border-radius:20px;overflow:hidden;border:2px solid #3a3f4a;background:#05080d}
+.kz-f img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.kz-a{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 50% 70%,color-mix(in srgb,var(--g) 45%,transparent),transparent 65%);mix-blend-mode:screen;animation:knP 3s ease-in-out infinite alternate}
+.kz-r{position:absolute;left:-50%;top:-20%;width:200%;height:140%;z-index:1;background:repeating-conic-gradient(from 0deg at 50% 60%,color-mix(in srgb,var(--g) 22%,transparent) 0 6deg,transparent 6deg 24deg);mix-blend-mode:screen;animation:knS 40s linear infinite;opacity:.6}
+.kz-e{position:absolute;inset:0;z-index:2;pointer-events:none}.kz-e i{position:absolute;bottom:-4px;width:4px;height:4px;border-radius:50%;background:var(--g);box-shadow:0 0 8px var(--g);animation:knE 3s ease-in infinite}
+.kz-h{position:absolute;left:10%;top:3%;width:80%;z-index:3;filter:drop-shadow(0 0 6px var(--g))}
+.kz-t{font-weight:800;font-size:13px;letter-spacing:.5px;margin-top:8px}
+@keyframes knP{from{opacity:.45}to{opacity:1}}@keyframes knS{to{transform:rotate(360deg)}}@keyframes knE{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translateY(-300px);opacity:0}}
+@media(prefers-reduced-motion:reduce){.kz-a,.kz-r,.kz-e i{animation:none}}
+
+/* v19 polish */
+:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+main .card{border-radius:18px}
+main .card button:not(.chk):not(.lk):not(.tag){min-height:42px}
+main input,main select,main textarea{min-height:44px;border-radius:12px}
+.chk{min-width:32px;min-height:32px}
+nav button{transition:transform .15s,color .15s}nav button:active{transform:scale(.92)}
+.ringw{position:relative;width:min(68vw,250px);aspect-ratio:1;margin:6px auto}
+.ringw svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.ringw circle{fill:none;stroke-width:6;stroke-linecap:round}.rg0{stroke:var(--b)}.rg1{stroke:var(--a);stroke-dasharray:339.3;transition:stroke-dashoffset .3s linear;filter:drop-shadow(0 0 6px color-mix(in srgb,var(--a) 60%,transparent))}
+.ringw .big{position:absolute;inset:0;display:grid;place-items:center;margin:0}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+.qe{font-size:14px;line-height:1.55;color:var(--m)}
+.qu{font-size:18px;line-height:1.5;font-weight:600;margin-top:10px;padding-top:10px;border-top:1px solid var(--b)}
 </style><script>
 (function(){try{var s=JSON.parse(localStorage.getItem('intizomPro1')||'{}');
 var t=s.theme;if(t==='qogoz'||t==='tun'||t==='mono')document.documentElement.dataset.theme=t;
@@ -604,12 +639,12 @@ function showLiveTimerNotif(force){
   const now=Date.now();
   if(!force && now-liveNotifAt<8000)return; /* throttle */
   liveNotifAt=now;
-  const body=(MD[tm]?MD[tm][0]:'Timer')+' · '+fm(left)+' qoldi';
+  const hm=d=>pad(d.getHours())+':'+pad(d.getMinutes()),endD=new Date(end||Date.now()+left*1000),lab=(MD[tm]?MD[tm][0]:'Timer'),body=lab+' · tugash vaqti '+hm(endD)+' · qoldi ~'+fm(left)+' ('+hm(new Date())+' holatiga)';
   try{
     if(!('Notification'in window)||Notification.permission!=='granted')return;
     if(navigator.serviceWorker&&navigator.serviceWorker.ready){
       navigator.serviceWorker.ready.then(r=>{
-        r.showNotification('⏱ Intizom · '+fm(left),{
+        r.showNotification('⏱ '+lab+' · '+hm(endD)+' da tugaydi',{timestamp:endD.getTime(),
           body:body,
           icon:'icon-192.png',
           badge:'icon-192.png',
@@ -631,6 +666,7 @@ function clearLiveTimerNotif(){
   }catch(e){}
 }
 
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&run)showLiveTimerNotif(true)});
 function pipSupported(){return !!(window.documentPictureInPicture)}
 
 async function openMiniPom(){
@@ -823,7 +859,7 @@ async function shareFlashHtml(d){
 }
 
 function toast(s){const t=$('toast');t.textContent=s;t.style.display='block';requestAnimationFrame(()=>{t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)'});clearTimeout(toast.i);toast.i=setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(8px)';setTimeout(()=>{t.style.display='none'},220)},2800)}
-function hdr(){const lv=Math.floor(S.pts/250)+1,need=lv*250,left=Math.max(0,need-S.pts);$('hpb').style.width=S.hp*2+'%';$('hpt').textContent=S.hp+' / 50 soul';$('cn').textContent=S.coins;$('lv').textContent='Level '+lv;$('pt').textContent=rkName(rkOf(lv))+' · '+left+' XP to L'+(lv+1)}
+function hdr(){const lv=lvOf(S.pts),need=XPL(lv+1),left=Math.max(0,need-S.pts);$('hpb').style.width=S.hp*2+'%';$('hpt').textContent=S.hp+' / 50 soul';$('cn').textContent=S.coins;$('lv').textContent='Level '+lv;$('pt').textContent=rkName(rkOfX(S.pts))+' · '+left+' XP to L'+(lv+1)}
 /* hit defined later */
 function check(){const n=new Date(),T=ds(),H=n.getHours(),mins=H*60+n.getMinutes();
 /* roll repeating tasks */
@@ -876,7 +912,7 @@ S.pen=(S.pen||[]).filter(p=>{
 save(1);hdr();remind()}
 function go(t,fromPop){if(t==='more'){showMoreSheet();return}if(t===tab&&!fromPop&&$('m').innerHTML)return;const prev=tab;tab=t;window.cosBoost&&cosBoost();const navOn=['vocab','shadow','fin','settings','hero'].includes(t)?'more':t;closeMoreSheet();$('nav').innerHTML=TABS.map(x=>`<button class="${x[0]==navOn?'on':''}" onclick="go('${x[0]}')"><b>${x[1]}</b>${x[2]}</button>`).join('');draw();tabAnim();if(!fromPop){try{history.pushState({tab:t},'',location.pathname+(t==='tasks'?'':'#'+t))}catch(e){}}}
 function hrOpts(sel,none){let o=none?`<option value="">${none}</option>`:'';for(let i=0;i<24;i++)o+=`<option value="${i}" ${sel===i?'selected':''}>${String(i).padStart(2,'0')}:00</option>`;return o}
-function draw(){hdr();$('m').innerHTML=({tasks:vTasks,habits:vHabits,plan:vPlan,timer:vTimer,fin:vFin,more:vMore,vocab:vVocab,shadow:vShadow,settings:vSettings,hero:vHero})[tab]();if(tab==='hero')heroPost()}
+function draw(){hdr();$('m').innerHTML=({tasks:vTasks,habits:vHabits,plan:vPlan,timer:vTimer,fin:vFin,more:vMore,vocab:vVocab,shadow:vShadow,settings:vSettings,hero:vHero})[tab]();if(tab==='hero'){heroPost();if(!S.onb)showOnb(0)}}
 /* TASKS */
 let tv='day';
 function vTasks(){const sw='<div class="tabs">'+[['day','Daily'],['mon','Monthly'],['mat','Matrix']].map(x=>`<button class="${tv==x[0]?'on':''}" onclick="tv='${x[0]}';draw()">${x[1]}</button>`).join('')+'</div>';return sw+(tv=='mon'?vMon():tv=='mat'?vMat():vTasksDay())}
@@ -911,8 +947,8 @@ const doneDays=weekDays.filter(d=>S.habits.some(h=>(h.log||[]).includes(d))).len
 return `<button class="p" style="width:100%" onclick="openH()">＋ New habit</button>
 <div class="card" style="margin-top:10px"><div class="row"><b class="sp">Bu hafta</b><span class="sm">${doneDays}/7 kun</span></div>
 <div class="row" style="gap:4px;margin-top:8px">${weekDays.map(d=>{const on=S.habits.some(h=>(h.log||[]).includes(d));const today=d===T;return `<div style="flex:1;height:28px;border-radius:8px;display:grid;place-items:center;font-size:11px;font-weight:600;background:${on?'var(--a)':'var(--b)'};color:${on?'#0a0a0a':'var(--m)'};${today?'outline:2px solid var(--a);outline-offset:1px':''}">${pd(d).toLocaleDateString(undefined,{weekday:'short'}).slice(0,2)}</div>`}).join('')}</div></div>
-<h2>Habits</h2>`+(S.habits.map((h,i)=>{const d=DIFF[h.diff],ok=due(h,T),dn=h.last==T;
-return `<div class="card ${dn?'done':''}" style="border-left:5px solid ${d.col};${ok?'':'opacity:.55'}"><div class="row"><button class="chk ${dn?'on':''}" ${ok||dn?'':'disabled'} onclick="doneH('${h.id}')"></button><div class="sp"><b>${E(h.t)}</b><div class="sm">${h.hour!=null||h.en!=null?(h.hour!=null?pad(h.hour)+':00':'?')+(h.en!=null?'–'+pad(h.en)+':00':'')+' · ':''}${repTxt(h)} · ${'✦'.repeat(h.diff)} ${d.n}${ok?'':' · not due today'}</div><div style="margin-top:4px">${statTag(h)} ${h.tags.map(x=>'<span class="tag">#'+E(x)+'</span>').join(' ')}</div>${(h.loc||h.hw||h.hwLink)?`<div class="sm" style="margin-top:4px">${h.loc?'📍 '+E(h.loc)+' · ':''}${h.hw?E(h.hw):''}${h.hwLink?` <a href="${E(h.hwLink)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">🔗</a>`:''}</div>`:''}</div><span class="tag">🔥 ${h.streak}</span><button class="d" onclick="negH('${h.id}')" title="Missed it">−</button></div>${h.cl.map((c,j)=>`<label class="cli ${c.d?'done':''}"><input type="checkbox" ${c.d?'checked':''} onchange="clH('${h.id}',${j})"><span class="sm">${E(c.t)}</span></label>`).join('')}${DE==h.id?`<textarea id="dx" rows="3" placeholder="Description…" style="margin-top:6px">${E(h.desc)}</textarea><div class="g" style="margin-top:6px"><button class="p" onclick="saveD('${h.id}')">Save</button><button onclick="DE='';draw()">Cancel</button></div>`:h.desc?`<div class="sm" style="white-space:pre-wrap;margin-top:6px">${E(h.desc)}</div><button class="lk" onclick="DE='${h.id}';draw()">✎ Edit description</button>`:`<button class="lk" onclick="DE='${h.id}';draw()">＋ Add description</button>`}<div class="row" style="margin-top:6px"><span class="sm" style="flex:1">🪙 +${d.c} · ❤️ +${d.s}</span><button ${i?'':'disabled'} onclick="mvH(${i},-1)">▲</button><button ${i<S.habits.length-1?'':'disabled'} onclick="mvH(${i},1)">▼</button><button onclick="openH('${h.id}')">✎ Edit</button></div></div>`}).join('')||'<p class="sm">No habits yet. Add one — completing it on schedule grows your streak, coins and soul.</p>')}
+<h2>Habits</h2>${(()=>{const T0=ds(),dl=S.habits.filter(h=>due(h,T0)),dn0=dl.filter(h=>h.last==T0).length,pc=dl.length?Math.round(dn0/dl.length*100):0;return `<div class="card" style="padding:12px 14px"><div class="row"><b class="sp">Bugun: ${dn0} / ${dl.length}</b><span class="sm">${pc}%</span></div><div style="height:8px;background:var(--b);border-radius:6px;margin-top:8px;overflow:hidden"><i style="display:block;height:100%;width:${pc}%;background:var(--a);transition:width .4s"></i></div></div>`})()}`+(S.habits.map((h,i)=>{const d=DIFF[h.diff],ok=due(h,T),dn=h.last==T;
+return `<div class="card ${dn?'done':''}" style="border-left:5px solid ${d.col};${ok?'':'opacity:.55'}"><div class="row"><button class="chk ${dn?'on':''}" ${ok||dn?'':'disabled'} onclick="doneH('${h.id}')"></button><div class="sp"><b>${E(h.t)}</b><div class="sm">${h.hour!=null||h.en!=null?(h.hour!=null?pad(h.hour)+':00':'?')+(h.en!=null?'–'+pad(h.en)+':00':'')+' · ':''}${repTxt(h)} · ${'✦'.repeat(h.diff)} ${d.n}${ok?'':' · not due today'}</div><div style="margin-top:4px">${statTag(h)} ${h.tags.map(x=>'<span class="tag">#'+E(x)+'</span>').join(' ')}</div>${(h.loc||h.hw||h.hwLink||(h.hwFiles&&h.hwFiles.length))?`<div class="sm" style="margin-top:4px">${h.loc?'📍 '+E(h.loc)+' · ':''}${h.hw?E(h.hw):''}${h.hwLink?` <a href="${E(h.hwLink)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">🔗</a>`:''}${hwChips(h)}</div>`:''}</div><span class="tag">🔥 ${h.streak}</span><button class="d" onclick="negH('${h.id}')" title="Missed it">−</button></div>${h.cl.map((c,j)=>`<label class="cli ${c.d?'done':''}"><input type="checkbox" ${c.d?'checked':''} onchange="clH('${h.id}',${j})"><span class="sm">${E(c.t)}</span></label>`).join('')}${DE==h.id?`<textarea id="dx" rows="3" placeholder="Description…" style="margin-top:6px">${E(h.desc)}</textarea><div class="g" style="margin-top:6px"><button class="p" onclick="saveD('${h.id}')">Save</button><button onclick="DE='';draw()">Cancel</button></div>`:h.desc?`<div class="sm" style="white-space:pre-wrap;margin-top:6px">${E(h.desc)}</div><button class="lk" onclick="DE='${h.id}';draw()">✎ Edit description</button>`:`<button class="lk" onclick="DE='${h.id}';draw()">＋ Add description</button>`}<div class="row" style="margin-top:6px"><span class="sm" style="flex:1">🪙 +${d.c} · ❤️ +${d.s}</span><button ${i?'':'disabled'} onclick="mvH(${i},-1)">▲</button><button ${i<S.habits.length-1?'':'disabled'} onclick="mvH(${i},1)">▼</button><button onclick="openH('${h.id}')">✎ Edit</button></div></div>`}).join('')||'<p class="sm">No habits yet. Add one — completing it on schedule grows your streak, coins and soul.</p>')}
 function saveD(i){const h=S.habits.find(x=>x.id==i);h.desc=$('dx').value.trim();DE='';save();draw()}
 function clH(i,j){const h=S.habits.find(x=>x.id==i);if(!h)return;const c=h.cl[j];const was=c.d;c.d=!c.d;
 if(!was&&c.d){/* completing a checklist item: give fraction of habit reward */
@@ -944,10 +980,24 @@ ${h.rep=='weekly'?`<label>Repeat On</label><div class="tabs">${[1,2,3,4,5,6,0].m
 <label>📍 Location / Joy</label><input value="${E(h.loc||'')}" oninput="HE.loc=this.value" placeholder="Masalan: kutubxona, uy, Zoom">
 <label>📝 Homework / Uy vazifa</label><textarea rows="2" oninput="HE.hw=this.value" placeholder="Bugungi uy vazifasi…">${E(h.hw||'')}</textarea>
 <label>🔗 Link / Fayl havolasi</label><input value="${E(h.hwLink||'')}" oninput="HE.hwLink=this.value" placeholder="https://… yoki drive link">
+<label>📎 Fayllar (rasm, PDF, audio, hujjat)</label><div id="hwF">${hwList(h)}</div><input type="file" multiple onchange="hwAdd(this)">
 <label>Adjust Streak</label><input type="number" min="0" value="${h.streak}" oninput="HE.streak=Math.max(0,+this.value||0)">
 ${h.isNew?'':`<button class="d" style="width:100%;margin-top:18px" onclick="delH('${h.id}')">🗑 Delete this habit</button>`}</div>`}
+/* homework files: stored on this device (IndexedDB) */
+const HWDB={open(){return new Promise((ok,no)=>{const r=indexedDB.open('intizomHW',1);r.onupgradeneeded=()=>r.result.createObjectStore('f');r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)})},
+ async put(id,b){const d=await this.open();return new Promise((ok,no)=>{const t=d.transaction('f','readwrite');t.objectStore('f').put(b,id);t.oncomplete=ok;t.onerror=()=>no(t.error)})},
+ async get(id){const d=await this.open();return new Promise((ok,no)=>{const r=d.transaction('f').objectStore('f').get(id);r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)})},
+ async del(id){try{const d=await this.open();d.transaction('f','readwrite').objectStore('f').delete(id)}catch(e){}}};
+const fsz=n=>n>1048576?(n/1048576).toFixed(1)+' MB':Math.max(1,Math.round(n/1024))+' KB';
+function hwList(h){return(h.hwFiles||[]).filter(f=>!(h._rm||[]).includes(f.id)).map(f=>`<div class="row" style="margin:6px 0"><span class="sp sm" style="word-break:break-all">📎 ${E(f.n)} · ${fsz(f.s)}</span><button onclick="hwOpen('${f.id}')">Ochish</button><button class="d" onclick="hwRm('${f.id}')">✕</button></div>`).join('')||'<div class="sm">Hali fayl yo‘q</div>'}
+function hwChips(h){const L=h.hwFiles||[];return L.length?`<div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:6px">${L.map(f=>`<button class="tag" style="cursor:pointer" onclick="event.stopPropagation();hwOpen('${f.id}','${h.id}')">📎 ${E(f.n.length>22?f.n.slice(0,20)+'…':f.n)}</button>`).join('')}</div>`:''}
+async function hwAdd(inp){const fs=[...inp.files];if(!fs.length)return;if(!window.indexedDB)return toast('Brauzer fayl saqlashni qo‘llamaydi');HE.hwFiles=HE.hwFiles||[];
+ for(const f of fs){if(f.size>50*1048576){toast(f.name+': 50 MB dan katta');continue}try{const id=uid();await HWDB.put(id,f);HE.hwFiles.push({id,n:f.name,t:f.type,s:f.size})}catch(e){toast('Saqlab bo‘lmadi: '+f.name)}}inp.value='';heR();toast('Fayl qo‘shildi — Saqlash ni bosing')}
+function hwRm(id){HE._rm=(HE._rm||[]).concat(id);heR()}
+async function hwOpen(id,hid){try{const b=await HWDB.get(id);if(!b)return toast('Fayl bu qurilmada topilmadi');const u=URL.createObjectURL(b),h=S.habits.concat(HE?[HE]:[]).flatMap(x=>x.hwFiles||[]).find(x=>x.id==id),n=(h&&h.n)||b.name||'file';
+ if(/^(image|audio|video)\//.test(b.type)||/pdf|text/.test(b.type))window.open(u,'_blank');else{const a=document.createElement('a');a.href=u;a.download=n;a.click()}setTimeout(()=>URL.revokeObjectURL(u),60000)}catch(e){toast('Ochib bo‘lmadi')}}
 function saveHE(){const h=HE;if(!h.t.trim())return toast('Enter a habit title');if(h.rep=='weekly'&&!h.days.length)return toast('Pick at least one weekday');
-h.t=h.t.trim();h.desc=(h.desc||'').trim();h.tags=(h.tg||'').split(',').map(x=>x.trim().replace(/^#/,'')).filter(Boolean);delete h.tg;const n=h.isNew;delete h.isNew;
+h.t=h.t.trim();h.desc=(h.desc||'').trim();h.tags=(h.tg||'').split(',').map(x=>x.trim().replace(/^#/,'')).filter(Boolean);delete h.tg;(h._rm||[]).forEach(id=>HWDB.del(id));h.hwFiles=(h.hwFiles||[]).filter(f=>!(h._rm||[]).includes(f.id));delete h._rm;const n=h.isNew;delete h.isNew;
 const k=S.habits.findIndex(x=>x.id==h.id);
 const timeChanged=k>=0&&(S.habits[k].hour!==h.hour||S.habits[k].en!==h.en);
 if(timeChanged){h.pd='';/* allow new penalty at new time */S.pen=(S.pen||[]).filter(p=>!(p.src==='habit'&&p.sid===h.id&&!p.d))}
@@ -957,10 +1007,13 @@ HE=null;$('he').style.display='none';save();draw();toast(n?'Habit added':'Habit 
 /* HERO: stats, OVR, level, radar (step 1 of gamification) */
 const STATS=[['Physical','#22c55e'],['Social','#3b82f6'],['Intellect','#f97316'],['Discipline','#ef4444'],['Mental','#eab308'],['Ambition','#8b5cf6']];
 const RADAR=['Physical','Social','Discipline','Mental','Intellect','Ambition'];
-const RANKS=[['Iron Initiate','#9aa3b0'],['Bronze Squire','#d98a3d'],['Silver Warrior','#d5dde8'],['Gold Knight','#f5c542'],['Platinum Champion','#3dd6c6'],['Diamond Hero','#b27bff']];
-const DIVS=['IV','III','II','I'],LVP=1,NDIV=24,GOAL_DAYS=66;
+const RANKS=[['Iron Initiate','#9aa3b0'],['Bronze Squire','#d98a3d'],['Silver Warrior','#d5dde8'],['Gold Knight','#f5c542'],['Platinum Champion','#3dd6c6'],['Diamond Hero','#b27bff'],['Master','#ef4444'],['Ascendant','#ffe066'],['Immortal','#9333ea']];
+const DIVS=['IV','III','II','I'],LVP=1,NDIV=36,DG=23,GOAL_DAYS=66;
+const XPL=l=>l<=1?0:50*l*l,lvOf=p=>Math.max(1,Math.floor(Math.sqrt(Math.max(0,p||0)/50))),TS=[1,2,3,5,7,9,12,16,21,27];
+const rkXp=d=>{const t=Math.min(8,d>>2),lo=XPL(TS[t]),hi=XPL(TS[t+1]);return Math.round(lo+(hi-lo)*(d-(t<<2))/4)};
+const rkOfX=p=>{let d=0;for(let i=0;i<NDIV;i++)if((p||0)>=rkXp(i))d=i;return d};
 const rkName=d=>RANKS[d>>2][0]+' '+DIVS[d&3],rkCol=d=>RANKS[d>>2][1],rkStart=d=>d*LVP+1;
-const rkRange=d=>LVP==1?'LVL '+rkStart(d):'LVL '+rkStart(d)+' – '+(rkStart(d)+LVP-1);
+const rkRange=d=>'LVL '+lvOf(rkXp(d))+' · '+rkXp(d)+' XP';
 const rkOf=lv=>Math.min(NDIV-1,Math.floor((lv-1)/LVP));
 const THEMES=[
  {id:'knight',n:'Fallen Knight',s:'From fallen to eternal king',e:'⚔️',c:'#c9a96e'},
@@ -973,7 +1026,7 @@ const evoTh=()=>THEMES.find(t=>t.id==S.evo)||THEMES[0];
 let bgn=0,RL=0;
 function badgeSVG(d,sz,lock){const c=rkCol(d),id='bgd'+(++bgn);
  return`<svg viewBox="0 0 64 72" width="${sz}" height="${Math.round(sz*72/64)}" style="flex:none;${lock?'filter:grayscale(1) brightness(.55);opacity:.7':'filter:drop-shadow(0 3px 9px '+c+'77)'}"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".3" stop-color="${c}"/><stop offset="1" stop-color="${c}" stop-opacity=".4"/></linearGradient></defs><path d="M32 3 58 13v25c0 16-12 26-26 32C18 64 6 54 6 38V13z" fill="url(#${id})" stroke="${c}" stroke-width="2"/><path d="M32 11 51 19v19c0 11-8 18-19 23C21 56 13 49 13 38V19z" fill="#0b0f16" fill-opacity=".75"/><path d="M32 20l9 10-9 13-9-13z" fill="${c}"/><path d="M32 20l9 10H23z" fill="#fff" fill-opacity=".45"/><text x="32" y="56" text-anchor="middle" font-size="11" font-weight="800" fill="${c}" font-family="Georgia,serif">${DIVS[d&3]}</text></svg>`}
-function heroPre(){let ch=0;S.rankDates=S.rankDates||{};const L=heroLevel();
+function heroPre(){chalCheck();let ch=0;S.rankDates=S.rankDates||{};const L=heroLevel();
  if(!S.heroStart){const a=S.habits.flatMap(h=>h.log||[]).sort();S.heroStart=a[0]||ds();ch=1}
  if(!S.rankDates[L.d]){S.rankDates[L.d]=ds();ch=1}
  if(ch)save()}
@@ -985,25 +1038,25 @@ function heroPost(){const tr=$('evo');if(!tr)return;const on=tr.querySelector('.
  tr.addEventListener('scroll',upd,{passive:true});upd()}
 function evoCard(){const cur=evoTh();
  return`<div class="card"><b>Evolution theme tanlang</b><div class="sm" style="margin:2px 0 10px">Bu faqat ko‘rinish uchun — istalgan payt o‘zgartirasiz</div>
- <div class="evo" id="evo">${THEMES.map(t=>{const on=t.id==cur.id;return`<div class="evo-c ${on?'on':''}" style="--ec:${t.c}" onclick="setEvo('${t.id}')"><div class="evo-art">${t.e}</div><div class="evo-n">${t.n}</div><div class="evo-s">${t.s}</div><div class="evo-b">${on?'✓ Tanlangan':'Tanlash'}</div></div>`}).join('')}</div>
+ <div class="evo" id="evo">${THEMES.map(t=>{const on=t.id==cur.id;return`<div class="evo-c ${on?'on':''}" style="--ec:${t.c}" onclick="setEvo('${t.id}')"><div class="evo-art" style="font-size:0">${heroArt(t.id,5,t.c)}</div><div class="evo-n">${t.n}</div><div class="evo-s">${t.s}</div><div class="evo-b">${on?'✓ Tanlangan':'Tanlash'}</div></div>`}).join('')}</div>
  <div class="evo-dots" id="evoDots">${THEMES.map(()=>'<i></i>').join('')}</div></div>`}
 function pace30(){const T=ds(),day=Math.max(1,dd(S.heroStart||T,T)+1),win=Math.min(30,day),from=new Date();from.setDate(from.getDate()-(win-1));const f=ds(from);let sum=0;
  S.habits.forEach(h=>{sum+=new Set((h.log||[]).filter(x=>x>=f)).size*DIFF[h.diff||2].p});return{day,pace:sum/win}}
-function xfCard(L){const{day,pace}=pace30(),goal=(NDIV-1)*LVP*250,rem=Math.max(0,goal-(S.pts||0)),need=Math.ceil(goal/GOAL_DAYS),eta=pace>0?Math.ceil(rem/pace):null,pct=Math.min(100,(S.pts||0)/goal*100);
+function xfCard(L){const{day,pace}=pace30(),goal=rkXp(DG),rem=Math.max(0,goal-(S.pts||0)),need=Math.ceil(goal/GOAL_DAYS),eta=pace>0?Math.ceil(rem/pace):null,pct=Math.min(100,(S.pts||0)/goal*100);
  return`<div class="card xf"><div class="xf-h">${GOAL_DAYS} KUNDA TRANSFORMATSIYA</div>
- <div class="xf-row"><div class="xf-t"><div class="xf-b" style="background:#2b2d33">${badgeSVG(0,64)}</div><div class="xf-n" style="color:#9aa3b0">${rkName(0).toUpperCase()}</div><div class="sm">1-kun</div></div><div class="xf-a">→</div><div class="xf-t"><div class="xf-b" style="background:linear-gradient(135deg,#9b51e0,#c9a2ff);box-shadow:0 0 28px #9b51e099">${badgeSVG(NDIV-1,64)}</div><div class="xf-n" style="color:#b27bff">${rkName(NDIV-1).toUpperCase()}</div><div class="sm">${GOAL_DAYS}-kun</div></div></div>
+ <div class="xf-row"><div class="xf-t"><div class="xf-b" style="background:#2b2d33">${badgeSVG(0,64)}</div><div class="xf-n" style="color:#9aa3b0">${rkName(0).toUpperCase()}</div><div class="sm">1-kun</div></div><div class="xf-a">→</div><div class="xf-t"><div class="xf-b" style="background:linear-gradient(135deg,#9b51e0,#c9a2ff);box-shadow:0 0 28px #9b51e099">${badgeSVG(DG,64)}</div><div class="xf-n" style="color:#b27bff">${rkName(DG).toUpperCase()}</div><div class="sm">${GOAL_DAYS}-kun</div></div></div>
  <div class="xf-bar"><i style="width:${pct}%"></i><span style="left:${pct}%"></span></div>
  <div class="sm" style="display:flex;justify-content:space-between;margin-top:6px"><span>${rkName(L.d)}</span><span>${Math.round(pct)}%</span></div>
  <div class="xf-st"><div><b>${day}</b><small>kun o‘tdi</small></div><div><b>${Math.round(pace)}</b><small>XP/kun (sizda)</small></div><div><b>${need}</b><small>XP/kun kerak</small></div></div>
  <div class="sm" style="text-align:center;margin-top:10px">${eta==null?'Odat bajaring — shunda taxminiy muddat shu yerda chiqadi.':pace>=need?'🔥 Shu sur’atda '+GOAL_DAYS+' kunda Diamond Hero bo‘lasiz (taxminan '+eta+' kun qoldi).':'Hozirgi sur’at bilan Diamond Hero’gacha ~<b>'+eta+' kun</b>. '+GOAL_DAYS+' kunga yetish uchun kuniga <b>'+need+' XP</b> kerak.'}</div></div>`}
 function fmtD(k){try{return pd(k).toLocaleDateString('en',{month:'short',day:'numeric',year:'numeric'})}catch(e){return k}}
-function ladderCard(L){const d0=L.d,pos=(L.lv-1+L.into/250)/LVP;let ids=[];for(let i=0;i<NDIV;i++)ids.push(i);if(!RL)ids=ids.filter(i=>i>=d0-2&&i<=d0+3);
- const nxt=d0<NDIV-1?rkStart(d0+1)-L.lv:0;let h='';
+function ladderCard(L){const d0=L.d,pos=d0+(((S.pts||0)-rkXp(d0))/Math.max(1,rkXp(d0+1)-rkXp(d0)));let ids=[];for(let i=0;i<NDIV;i++)ids.push(i);if(!RL)ids=ids.filter(i=>i>=d0-2&&i<=d0+3);
+ const nxt=d0<NDIV-1?rkXp(d0+1)-(S.pts||0):0;let h='';
  ids.forEach((d,k)=>{const cur=d==d0,lock=d>d0,ach=(S.rankDates||{})[d],c=rkCol(d);
   h+=`<div class="rk ${cur?'cur':''} ${lock?'lock':''}"><div class="rk-b">${badgeSVG(d,cur?72:50,lock)}</div><div class="rk-t"><small>${cur?'Current rank':lock?'':'Achieved'+(ach?' '+fmtD(ach):'')}</small><b style="${lock?'':'color:'+(cur?'var(--t)':c)}">${rkName(d)}</b><small style="${cur?'color:'+c:''}">${lock?'🔒 '+rkRange(d)+' da ochiladi':rkRange(d)}</small></div></div>`;
   if(k<ids.length-1&&ids[k+1]==d+1)h+=`<div class="rk-hx">${[1,2,3].map(j=>`<i class="${pos>=d+j/4?'on':''}"></i>`).join('')}</div>`});
  return`<div class="card ladder"><div style="text-align:center;font-weight:800;font-size:17px;line-height:1.3">Darajalar bo‘ylab ko‘tarilib, <span style="color:var(--a)">o‘zingizni rivojlantiring</span></div>
- <div class="sm" style="text-align:center;margin:8px 0 14px">${nxt>0?'Keyingi rankgacha <b style="color:var(--t)">'+nxt+' level</b> qoldi':'Eng yuqori rankdasiz 👑'}</div>
+ <div class="sm" style="text-align:center;margin:8px 0 14px">${nxt>0?'Keyingi rankgacha <b style="color:var(--t)">'+nxt+' XP</b> qoldi':'Eng yuqori rankdasiz 👑'}</div>
  ${h}<button style="width:100%;margin-top:12px" onclick="RL=!RL;draw()">${RL?'Qisqartirish':'Barcha ranklarni ko‘rish ('+NDIV+')'}</button></div>`}
 const statTag=h=>{const n=statOf(h),c=(STATS.find(x=>x[0]==n)||[0,'#888'])[1];return`<span class="tag" style="background:${c}22;color:color-mix(in srgb,${c} 70%,var(--t));border:1px solid ${c}66">● ${n}</span>`};
 
@@ -1018,7 +1071,7 @@ const statOf=h=>h.stat&&STATS.some(x=>x[0]==h.stat)?h.stat:guessStat(h);
 function heroStats(){const from=new Date();from.setDate(from.getDate()-29);const f=ds(from),pts={};STATS.forEach(s=>pts[s[0]]=0);
  S.habits.forEach(h=>{const d=DIFF[h.diff||2],days=new Set((h.log||[]).filter(x=>x>=f));pts[statOf(h)]+=days.size*d.p});
  return STATS.map(s=>({n:s[0],c:s[1],raw:pts[s[0]],v:Math.min(99,Math.round(10+89*(1-Math.exp(-pts[s[0]]/120))))}))}
-function heroLevel(){const lv=Math.floor((S.pts||0)/250)+1,into=(S.pts||0)%250,d=rkOf(lv);return{lv,into,left:250-into,tier:rkName(d),ti:d>>2,d}}
+function heroLevel(){const p=S.pts||0,lv=lvOf(p),lo=XPL(lv),hi=XPL(lv+1),d=rkOfX(p);return{lv,into:p-lo,span:hi-lo,left:hi-p,tier:rkName(d),ti:d>>2,d}}
 function weekDots(){const n=new Date(),dow=(n.getDay()+6)%7,T=ds(),out=[];
  for(let i=0;i<7;i++){const d=new Date(n);d.setDate(n.getDate()-dow+i);const k=ds(d);out.push({l:'MTWTFSS'[i],k,done:S.habits.some(h=>(h.log||[]).includes(k)),today:k==T,future:k>T})}return out}
 function heroSVG(ti,col){const a=col||'var(--a)';let g='';
@@ -1042,17 +1095,59 @@ function radarSVG(st,ovr){const cx=150,cy=140,R=100,by={};st.forEach(x=>by[x.n]=
  g+=`<text x="${cx}" y="${cy+12}" text-anchor="middle" font-size="40" font-weight="800" fill="var(--t)">${ovr}</text><text x="${cx}" y="${cy+30}" text-anchor="middle" font-size="9" letter-spacing="2" fill="var(--m)">OVR RATING</text>`;
  return`<svg viewBox="-30 0 360 290" style="width:100%;max-width:380px;display:block;margin:0 auto">${g}</svg>`}
 function vHero(){heroPre();const st=heroStats(),ovr=Math.round(st.reduce((a,x)=>a+x.v,0)/6),L=heroLevel(),wk=weekDots(),low=st.slice().sort((a,b)=>a.v-b.v)[0];
- return`<div class="card hero-main" style="text-align:center">${heroSVG(L.ti,evoTh().c)}<div class="hero-theme" style="color:${evoTh().c}">${evoTh().e} ${evoTh().n}</div>
+ return`<div class="card hero-main" style="text-align:center">${heroArt(evoTh().id,L.ti,evoTh().c,L.lv)}<div class="hero-theme" style="color:${evoTh().c}">${evoTh().e} ${evoTh().n}</div>
  <div class="hero-rank">${badgeSVG(L.d,46)}<div style="text-align:left"><div style="font-size:13px;letter-spacing:1.5px;font-weight:700;color:${rkCol(L.d)}">${L.tier.toUpperCase()}</div><div style="font-size:28px;font-weight:800;line-height:1.1">Level ${L.lv}</div></div></div>
- <div style="height:8px;background:var(--b);border-radius:6px;margin:10px 4px 4px;overflow:hidden"><i style="display:block;height:100%;width:${L.into/250*100}%;background:${evoTh().c};box-shadow:0 0 10px ${evoTh().c}"></i></div>
+ <div style="height:8px;background:var(--b);border-radius:6px;margin:10px 4px 4px;overflow:hidden"><i style="display:block;height:100%;width:${L.into/L.span*100}%;background:${evoTh().c};box-shadow:0 0 10px ${evoTh().c}"></i></div>
  <div class="sm" style="display:flex;justify-content:space-between"><span>LVL ${L.lv}</span><span>${L.left} XP to next level</span><span>LVL ${L.lv+1}</span></div>
  <div style="display:flex;justify-content:space-between;margin-top:14px">${wk.map(d=>`<div style="text-align:center;font-size:11px;color:var(--m);opacity:${d.future?.45:1}"><div style="width:34px;height:34px;border-radius:50%;margin:0 auto 4px;display:flex;align-items:center;justify-content:center;border:2px solid ${d.done?'var(--a)':'var(--b)'};background:${d.done?'color-mix(in srgb,var(--a) 22%,transparent)':'transparent'};box-shadow:${d.today?'0 0 0 3px color-mix(in srgb,var(--a) 35%,transparent)':'none'};color:var(--t)">${d.done?'✓':''}</div>${d.l}</div>`).join('')}</div></div>
  ${xfCard(L)}
  ${ladderCard(L)}
+ ${chalCard()}
+ ${ratCard()}
+ <button style="width:100%;margin:8px 0" onclick="showOnb(0)">📖 Hikoyani qayta ko‘rish</button>
  <div class="card"><b>Progress</b><div class="sm">So'nggi 30 kundagi bajarilgan odatlar asosida</div>${radarSVG(st,ovr)}
  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px">${st.map(x=>`<div class="card" style="margin:0;padding:12px;border-color:${x.c}55;display:flex;align-items:center;gap:10px"><div style="font-size:28px;font-weight:800;color:var(--t)">${x.v}</div><div style="font-size:12px;color:${x.c};font-weight:600">${x.n}</div></div>`).join('')}</div></div>
  ${evoCard()}
  <div class="card sm">💡 Eng past stat: <b style="color:${low.c}">${low.n}</b> (${low.v}). Shu sohaga bitta kichik odat qo'shing, OVR tezroq o'sadi.<br>Odatlar statini Habits → odatni tahrirlash → <b>Stat</b> bo'limidan o'zgartirishingiz mumkin.</div>`}
+/* v17: XP-sqrt levels, 9 rank tiers, hero art, challenges, rating, onboarding */
+function tierFx(ti,c){let g=`<circle cx="100" cy="120" r="${84+ti*2}" fill="none" stroke="${c}" stroke-opacity="${.12+ti*.05}" stroke-width="2"/>`;
+ for(let i=0;i<Math.min(ti,8);i++){g+=`<circle cx="${28+(i*53)%146}" cy="${30+(i*71)%150}" r="1.8" fill="${c}" opacity=".85"/>`}
+ if(ti>=6)g+=`<ellipse cx="100" cy="16" rx="26" ry="6" fill="none" stroke="${c}" stroke-width="2.5"/>`;
+ if(ti>=8)g+=`<path d="M40 70Q10 90 22 130M160 70Q190 90 178 130" stroke="${c}" stroke-width="2" fill="none" opacity=".7"/>`;return g}
+function knightArt(lv,c){const n=Math.min(8,Math.floor((lv||1)/5)),G=['#8ea0b8','#9fb4d0','#7fd0ff','#ffd36b','#ff9f43','#ff5d5d','#c084fc','#7df9ff','#fff2b0'][n],NM=['Fallen','Risen','Sworn','Gilded','Radiant','Crowned','Ascended','Eternal','King'][n];
+ let e='';for(let i=0;i<Math.min(16,n*2);i++)e+=`<i style="left:${(i*37+11)%92}%;animation-delay:${(i*.37)%3}s;animation-duration:${2.4+(i%4)*.6}s"></i>`;
+ return`<div class="kz" style="--g:${G}"><div class="kz-f" style="${n?'border-color:'+G+';box-shadow:0 0 '+(8+n*5)+'px '+G+'88,inset 0 0 '+(10+n*4)+'px '+G+'55':''}">${n>=1?'<div class="kz-a"></div>':''}${n>=2?'<div class="kz-r"></div>':''}<img src="knight.png" alt="" style="filter:grayscale(${Math.max(0,.55-n*.1)}) brightness(${.8+n*.05}) contrast(${1+n*.03}) saturate(${.9+n*.12}) drop-shadow(0 0 ${3+n*3}px ${G})">${n>=3?'<div class="kz-e">'+e+'</div>':''}${n>=4?'<svg class="kz-h" viewBox="0 0 100 20"><ellipse cx="50" cy="10" rx="34" ry="6" fill="none" stroke="'+G+'" stroke-width="2.5"/>'+(n>=6?'<path d="M10 10l6-8 8 6 10-8 8 8 8-8 8 8 10-6 6 8" fill="none" stroke="'+G+'" stroke-width="1.6"/>':'')+'</svg>':''}</div><div class="kz-t" style="color:${G}">${NM} · Stage ${n+1}</div></div>`}
+function heroArt(id,ti,c,lv){if(id=='knight')return knightArt(lv==null?18:lv,c);const d='#1b1d22',m='#34373f',a=`<defs><radialGradient id="ha${id}" cx="50%" cy="55%" r="55%"><stop offset="0" stop-color="${c}" stop-opacity="${.2+ti*.05}"/><stop offset="1" stop-color="${c}" stop-opacity="0"/></radialGradient></defs><rect width="200" height="230" fill="url(#ha${id})"/>`+tierFx(ti,c);let f='';
+ if(id=='knight')f=`<path d="M62 92 42 220h116L138 92z" fill="#15130f" stroke="${c}" stroke-opacity=".4"/><path d="M70 94q30-12 60 0l8 66H62z" fill="${m}" stroke="${c}"/><ellipse cx="60" cy="98" rx="19" ry="12" fill="${d}" stroke="${c}"/><ellipse cx="140" cy="98" rx="19" ry="12" fill="${d}" stroke="${c}"/><path d="M82 44q18-24 36 0l3 36q-21 12-42 0z" fill="${m}" stroke="${c}"/><rect x="85" y="55" width="30" height="5" fill="#000"/>${ti>=3?`<path d="M100 22q-6-18 14-14-14 4-8 18" fill="${c}"/>`:''}<rect x="97" y="118" width="6" height="100" fill="#b7bcc6"/><rect x="80" y="150" width="40" height="7" rx="3" fill="${c}"/><rect x="92" y="135" width="16" height="16" rx="5" fill="${d}" stroke="${c}"/><rect x="72" y="160" width="22" height="58" fill="${d}"/><rect x="106" y="160" width="22" height="58" fill="${d}"/>`;
+ else if(id=='ninja')f=`<path d="M60 100q-30 40-14 100l24-20z" fill="${c}" fill-opacity=".35"/><path d="M70 92q30-14 60 0l10 80H60z" fill="${d}" stroke="${c}"/><path d="M80 40q20-22 40 0l4 38q-24 12-48 0z" fill="${d}" stroke="${c}"/><rect x="82" y="52" width="36" height="9" rx="4" fill="${m}"/><circle cx="92" cy="56" r="2.4" fill="${c}"/><circle cx="108" cy="56" r="2.4" fill="${c}"/><path d="M122 64q40 8 48 40-20-22-46-26z" fill="${c}"/><path d="M146 40 106 150" stroke="#cfd3dc" stroke-width="4"/><rect x="62" y="172" width="30" height="46" fill="${d}"/><rect x="108" y="172" width="30" height="46" fill="${d}"/>`;
+ else if(id=='cyber')f=`<path d="M64 94q36-16 72 0l6 76H58z" fill="${d}" stroke="${c}"/><path d="M62 98h20v22H62zM118 98h20v22h-20z" fill="${m}" stroke="${c}"/><path d="M82 42q18-20 36 0l2 36q-20 10-40 0z" fill="${m}" stroke="${c}"/><rect x="84" y="54" width="32" height="10" rx="3" fill="${c}"/><path d="M84 112h32M84 126h32M100 100v50" stroke="${c}" stroke-opacity=".8"/><circle cx="100" cy="138" r="7" fill="${c}"/><rect x="64" y="172" width="28" height="46" fill="${d}" stroke="${c}" stroke-opacity=".5"/><rect x="108" y="172" width="28" height="46" fill="${d}" stroke="${c}" stroke-opacity=".5"/><path d="M142 90v-40h18" stroke="${c}" fill="none"/>`;
+ else if(id=='mage')f=`<path d="M100 8 70 66h60z" fill="${m}" stroke="${c}"/><ellipse cx="100" cy="68" rx="38" ry="8" fill="${d}" stroke="${c}"/><circle cx="100" cy="88" r="16" fill="#d9c8b0"/><path d="M92 98q8 22 16 0l-4 30h-8z" fill="#e8e8f0"/><path d="M70 104q30-12 60 0l24 116H46z" fill="${d}" stroke="${c}"/><path d="M100 120v100" stroke="${c}" stroke-opacity=".5"/><rect x="152" y="70" width="5" height="150" fill="#6b4f2a"/><circle cx="154" cy="62" r="${11+ti}" fill="${c}"/><circle cx="154" cy="62" r="${16+ti}" fill="none" stroke="${c}" stroke-opacity=".4"/>`;
+ else if(id=='spartan')f=`<path d="M64 98q36-14 72 0l4 70H60z" fill="#7a1f1f" stroke="${c}"/><path d="M80 44q20-22 40 0l2 36q-22 12-44 0z" fill="#8a6a2e" stroke="${c}"/><rect x="86" y="58" width="28" height="6" fill="#000"/><path d="M82 34q18-26 36 0-18-8-36 0z" fill="${c}"/><circle cx="52" cy="140" r="34" fill="#8a6a2e" stroke="${c}" stroke-width="3"/><path d="M52 112v56M24 140h56" stroke="${c}" stroke-width="3"/><rect x="150" y="30" width="4" height="190" fill="#cfd3dc"/><path d="M152 12l9 24h-18z" fill="${c}"/><rect x="66" y="170" width="26" height="48" fill="#6b4a1f"/><rect x="108" y="170" width="26" height="48" fill="#6b4a1f"/>`;
+ else f=`<path d="M100 60q-70-30-90 40 36-14 70 6zM100 60q70-30 90 40-36-14-70 6z" fill="${c}" fill-opacity=".85" stroke="#fff" stroke-opacity=".4"/><path d="M100 50q-22 18-14 54l14 50 14-50q8-36-14-54z" fill="#ffb04a"/><path d="M100 150q-34 30-20 70 8-30 20-34 12 4 20 34 14-40-20-70z" fill="${c}"/><circle cx="100" cy="64" r="11" fill="#ffd89a"/><path d="M108 60l16 4-16 4z" fill="#fff"/><circle cx="103" cy="62" r="2" fill="#000"/>`;
+ return`<svg viewBox="0 0 200 230" style="width:100%;max-width:230px;height:auto;display:block;margin:0 auto">${a}${f}</svg>`}
+function dayXp(k){return S.habits.reduce((s,h)=>s+((h.log||[]).includes(k)?DIFF[h.diff||2].p:0),0)}
+function chalCheck(){S.chal=S.chal||[];let ch=0,T=ds();S.chal.forEach(c=>{if(c.st)return;const h=S.habits.find(x=>x.id==c.hid);if(!h){c.st='lost';ch=1;return}
+ const n=(h.log||[]).filter(x=>x>=c.start&&dd(c.start,x)<c.len).length;c.n=n;if(n>=c.len){c.st='won';S.pts=(S.pts||0)+c.len*10;S.coins=(S.coins||0)+c.len*2;ch=1;toast('🏆 Challenge yutildi! +'+c.len*10+' XP')}else if(dd(c.start,T)>=c.len){c.st='lost';ch=1}});if(ch)save()}
+function chalAdd(len){const h=$('chH').value;if(!h)return toast('Avval odat qo‘shing');S.chal=S.chal||[];S.chal.unshift({id:uid(),hid:h,len:len,start:ds()});save();draw()}
+function chalDel(i){S.chal=(S.chal||[]).filter(c=>c.id!=i);save();draw()}
+function chalCard(){const L=S.chal||[],T=ds();
+ return`<div class="card"><b>🏁 Challenge</b><div class="sm" style="margin:2px 0 8px">Tanlangan odatni boshlangan kundan boshlab har kuni bajaring. Yutsangiz: kun×10 XP va kun×2 coin.</div>
+ ${L.slice(0,4).map(c=>{const h=S.habits.find(x=>x.id==c.hid),n=c.n||0,col=c.st=='won'?'#22c55e':c.st=='lost'?'#ef4444':'var(--a)';return`<div style="margin:8px 0"><div class="row"><span class="sp">${h?h.t:'(o‘chirilgan odat)'} · ${c.len} kun</span><span class="sm">${c.st=='won'?'✅ yutildi':c.st=='lost'?'❌ yutqazildi':n+' / '+c.len+' · '+Math.max(0,c.len-dd(c.start,T)-1)+' kun qoldi'}</span><button onclick="chalDel('${c.id}')" style="margin-left:8px">✕</button></div><div style="height:6px;background:var(--b);border-radius:4px;margin-top:4px;overflow:hidden"><i style="display:block;height:100%;width:${Math.min(100,n/c.len*100)}%;background:${col}"></i></div></div>`}).join('')}
+ <select id="chH" style="width:100%;margin-top:6px">${S.habits.map(h=>`<option value="${h.id}">${h.t}</option>`).join('')}</select>
+ <div style="display:flex;gap:8px;margin-top:8px">${[7,21,30,66].map(n=>`<button style="flex:1" onclick="chalAdd(${n})">${n} kun</button>`).join('')}</div></div>`}
+function ratCard(){const n=new Date(),dow=(n.getDay()+6)%7,w=[];for(let i=7;i>=0;i--){let s=0;for(let j=0;j<7;j++){const d=new Date(n);d.setDate(n.getDate()-dow-i*7+j);if(ds(d)<=ds())s+=dayXp(ds(d))}w.push(s)}
+ const cur=w[7],rk=1+w.slice(0,7).filter(x=>x>cur).length,mx=Math.max(1,...w),best=Math.max(...w.slice(0,7));
+ return`<div class="card"><b>📊 Reyting (shaxsiy)</b><div class="sm" style="margin:2px 0 8px">Bu haftangiz oxirgi 8 hafta ichida <b style="color:var(--t)">#${rk}</b> o‘rinda${cur>best&&cur>0?' — yangi rekord 🔥':''}.</div>
+ <div style="display:flex;align-items:flex-end;gap:6px;height:80px">${w.map((v,i)=>`<div style="flex:1;text-align:center;font-size:10px;color:var(--m)"><div style="height:${Math.max(3,v/mx*64)}px;background:${i==7?'var(--a)':'var(--b)'};border-radius:4px 4px 0 0"></div>${v}</div>`).join('')}</div>
+ <div class="sm" style="margin-top:6px">Ustunlar: haftalik XP. Boshqa foydalanuvchilar bilan reyting uchun server kerak — hozircha o‘zingiz bilan raqobat.</div></div>`}
+let ONB=0;
+function showOnb(s){ONB=s;let o=$('onb');if(!o){o=document.createElement('div');o.id='onb';o.style.cssText='position:fixed;inset:0;z-index:99999;background:#000;color:#fff;overflow:auto;padding:28px 20px;text-align:center;display:flex;flex-direction:column';document.body.appendChild(o)}
+ const th=evoTh(),btn=(t,f)=>`<button onclick="${f}" style="margin-top:auto;padding:16px;border-radius:14px;border:0;font-weight:800;font-size:16px;background:linear-gradient(90deg,#e0b030,#ffa000);color:#111">${t}</button>`;let h='';
+ if(s==0)h=`<h2 style="margin:6px 0">Evolution mavzusini tanlang</h2><div class="sm">Bu faqat ko‘rinish uchun, keyin o‘zgartirasiz.</div><div style="display:flex;gap:8px;overflow-x:auto;margin:14px 0;scroll-snap-type:x mandatory">${THEMES.map(t=>`<div onclick="S.evo='${t.id}';save();showOnb(0)" style="flex:0 0 70%;scroll-snap-align:center;border:2px solid ${t.id==th.id?t.c:'#333'};border-radius:18px;padding:8px">${heroArt(t.id,5,t.c)}<div style="font-family:Georgia,serif;font-size:22px;font-weight:700">${t.n}</div><div class="sm">${t.s}</div></div>`).join('')}</div>${btn('Davom etish','showOnb(1)')}`;
+ else if(s==1)h=`<h2 style="margin:6px 0">Darajalar bo‘ylab ko‘tarilib, o‘zingizni rivojlantiring</h2><div style="display:flex;flex-direction:column;gap:6px;margin:14px 0">${RANKS.map((r,i)=>`<div style="display:flex;align-items:center;gap:12px;text-align:left">${badgeSVG(i*4+3,42)}<div><b style="color:${r[1]}">${r[0]}</b><div style="font-size:11px;color:#888">LVL ${lvOf(rkXp(i*4))} dan · ${rkXp(i*4)} XP</div></div></div>`).join('')}</div>${btn('Davom etish','showOnb(2)')}`;
+ else h=`<h2 style="color:#e0b030;margin:30px 0 14px">${GOAL_DAYS} KUNDA TRANSFORMATSIYA</h2><div style="display:flex;align-items:center;justify-content:center;gap:12px">${badgeSVG(0,70)}<span style="font-size:26px;color:#e0b030">→</span>${badgeSVG(DG,70)}</div><p style="font-family:Georgia,serif;margin:18px 0">${GOAL_DAYS} kunda ${rkName(0)} dan ${rkName(DG)} gacha o‘sasiz. Har kuni odatlarni bajaring — XP yig‘ing, rank oshadi.</p>${btn('Ko‘rsating','S.onb=1;save();$(\'onb\').remove();draw()')}`;
+ o.innerHTML=h}
+
 /* PLAN + B PLAN */
 
 let _planDrag=null;
@@ -1332,7 +1427,11 @@ function notifyTimerRunning(){
   if(!run)return;
   showLiveTimerNotif(false);
 }
-function vTimer(){return `<div class="tabs">${Object.keys(MD).map(k=>`<button class="${tm==k?'on':''}" onclick="setM('${k}')">${MD[k][0]}</button>`).join('')}</div><div class="card"><div class="big" id="tbig">${fm(left)}</div><div class="g" style="margin-top:10px"><button class="p" onclick="tgl()" id="tgo">${run?'Pause':'Start'}</button><button onclick="setM(tm)">Reset</button><button onclick="openMiniPom()">Mini ▢</button></div><button style="width:100%;margin-top:8px" onclick="study(1)">🎯 Focus mode (with mind-dump notes)</button></div>${selCard()}<div class="card sm">Today’s focus: <b>${S.focus}</b> min. Mini: laptopda boshqa ilova ustida (PiP), telefonda tirik bildirishnoma. Sahifa butunlay yopilsa timer to‘xtaydi.</div>`}
+function vTimer(){return `<div class="tabs">${Object.keys(MD).map(k=>`<button class="${tm==k?'on':''}" onclick="setM('${k}')">${MD[k][0]}</button>`).join('')}</div><div class="card"><div class="ringw"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" class="rg0"/><circle id="tring" cx="60" cy="60" r="54" class="rg1" style="stroke-dashoffset:${ringOff()}"/></svg><div class="big" id="tbig">${fm(left)}</div></div><div class="g" style="margin-top:10px"><button class="p" onclick="tgl()" id="tgo">${run?'Pause':'Start'}</button><button onclick="setM(tm)">Reset</button><button onclick="openMiniPom()">Mini ▢</button></div><button style="width:100%;margin-top:8px" onclick="study(1)">🎯 Focus mode (with mind-dump notes)</button></div>${mindCard()}${selCard()}<div class="card sm">Today’s focus: <b>${S.focus}</b> min. Mini: laptopda boshqa ilova ustida (PiP), telefonda tirik bildirishnoma. Sahifa butunlay yopilsa timer to‘xtaydi.</div>`}
+function ringOff(){const tot=(MD[tm]?MD[tm][1]:25)*60;return 339.3*(left/Math.max(1,tot))}
+function mindCard(){return`<div class="card"><b>💭 What’s on your mind?</b><div class="sm" style="margin:2px 0 8px">Timer ishlayotganda chalg‘itgan fikrni shu yerga tashlab qo‘ying — vaqtingiz to‘xtamaydi.</div><div class="row"><input id="mindT" class="sp" placeholder="Fikr, g‘oya, eslatma…" onkeydown="if(event.key==='Enter')saveMindT()"><button class="p" onclick="saveMindT()">Save</button></div><div id="mindL">${mindList()}</div></div>`}
+function mindList(){const n=(S.notes||[]).slice(0,3);return n.length?n.map(x=>`<div class="sm" style="margin-top:6px;padding:8px 10px;border-radius:10px;background:var(--b)">${E(x.t)}</div>`).join('')+`<div class="sm" style="margin-top:6px;opacity:.7">Jami ${S.notes.length} ta fikr (Settings → Fikrlar)</div>`:''}
+function saveMindT(){const el=$('mindT');if(!el)return;const v=el.value.trim();if(!v)return;S.notes.unshift({id:uid(),t:v,d:new Date().toLocaleString()});el.value='';save();const l=$('mindL');if(l)l.innerHTML=mindList();toast('Fikr saqlandi');el.focus()}
 function selItem(){if(!sel)return null;const a=sel.split(':');return (a[0]=='t'?S.tasks:S.habits).find(x=>x.id==a[1])||null}
 function selCard(){const T=ds(),ts=S.tasks.filter(t=>!t.done&&t.date<=T),it=selItem();
 return `<div class="card"><select onchange="sel=this.value;draw()"><option value="">Choose a task or habit…</option>${ts.length?'<optgroup label="Tasks">'+ts.map(t=>`<option value="t:${t.id}" ${sel=='t:'+t.id?'selected':''}>${E(t.t)}</option>`).join('')+'</optgroup>':''}${S.habits.length?'<optgroup label="Habits">'+S.habits.map(h=>`<option value="h:${h.id}" ${sel=='h:'+h.id?'selected':''}>${E(h.t)}</option>`).join('')+'</optgroup>':''}</select>${it?`<div class="sm" style="margin-top:6px">🍅 Total for this item: <b>${it.fm||0}</b> min</div>`:''}</div>`}
@@ -1365,13 +1464,25 @@ const QT=[['We are what we repeatedly do. Excellence, then, is not an act, but a
 function pickQ(){let i;do{i=Math.floor(Math.random()*QT.length)}while(i==lq&&QT.length>1);lq=i;$('qt').textContent='\u201c'+QT[i][0]+'\u201d';$('qa').textContent=QT[i][1]?'\u2014 '+QT[i][1]:''}
 function showQ(){pickQ();$('qm').style.display='flex'}
 function closeQ(){$('qm').style.display='none'}
+
+function sharkReal(done){const img=$('shk'),box=$('intro');if(!img||!box)return;img.style.display='none';
+const cv=document.createElement('canvas'),dpr=Math.min(2,window.devicePixelRatio||1);cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none';
+cv.width=Math.round(innerWidth*dpr);cv.height=Math.round(innerHeight*dpr);box.appendChild(cv);const x=cv.getContext('2d');
+const go=()=>{const nw=img.naturalWidth||480,nh=img.naturalHeight||300,W=cv.width,H=cv.height,base=Math.min(W/nw,H/nh)*.8,T=1500,t0=performance.now();
+ const f=now=>{const p=Math.min(1,(now-t0)/T),z=p*p*p,sc=base*(.07+3.6*z),ph=(now-t0)/1000*Math.PI*2*(3+5*p),al=Math.min(1,p*12)*Math.min(1,(1-p)*14);
+  x.clearRect(0,0,W,H);x.globalAlpha=al;const cx=W/2+Math.sin(ph*.5)*W*.012*(1-p),cy=H*.48-(1-z)*H*.02;
+  const sx=(Math.random()-.5)*14*z*dpr,sy=(Math.random()-.5)*10*z*dpr;x.save();x.translate(cx+sx,cy+sy);x.rotate(Math.sin(ph*.5)*.05*(1-z*.6));
+  if(p>.3){[.9,.95].forEach(g=>{x.globalAlpha=al*.16;x.drawImage(img,-nw*sc*g/2,-nh*sc*g/2,nw*sc*g,nh*sc*g)});x.globalAlpha=al}
+  const a=nw*.02*sc*(.7+z);for(let y=0;y<nh;y+=2){const dx=a*Math.sin(ph-y/nh*4.4)*(.35+.65*y/nh);x.drawImage(img,0,y,nw,2.2,-nw*sc/2+dx,-nh*sc/2+y*sc,nw*sc,2.2*sc+.7)}
+  x.restore();x.globalAlpha=1;if(p<1)requestAnimationFrame(f);else{cv.remove();done()}};requestAnimationFrame(f)};
+if(img.complete&&img.naturalWidth)go();else img.onload=go}
 function intro(){const el=$('intro');if(!el)return showCI();let d=0;const done=()=>{if(d)return;d=1;el.style.opacity='0';el.style.transition='opacity .35s ease';setTimeout(()=>{el.style.display='none';showCI()},360)};
 el.addEventListener('click',done);
 const sk=$('skip');if(sk)sk.onclick=function(e){e.stopPropagation();done()};
 const bubs=$('introBubs');if(bubs&&!bubs.childElementCount){for(let i=0;i<24;i++){const b=document.createElement('i');const sz=3+Math.random()*10;b.style.left=(Math.random()*100)+'%';b.style.width=b.style.height=sz+'px';b.style.animationDuration=(3.5+Math.random()*5)+'s';b.style.animationDelay=(Math.random()*4)+'s';bubs.appendChild(b)}}
-const sh=$('shk');if(sh)sh.addEventListener('animationend',function(e){if(e.animationName==='sharkAtk')done()});
+sharkReal(done);
 if(matchMedia('(prefers-reduced-motion:reduce)').matches)done();
-else setTimeout(done,3200)}
+else setTimeout(done,2200)}
 function tick(){left=Math.max(0,Math.round((end-Date.now())/1000));upd();
 try{const m=$('miniPom');if(m&&m.style.display!=='none'){const t=m.querySelector('.mp-time');if(t)t.textContent=fm(left)}}catch(e){}
 if(left%15===0)saveTimer();
@@ -1382,7 +1493,7 @@ if(!left){clearInterval(iv);run=0;end=0;saveTimer();releaseWake();updateMediaSes
   notifyTimer('Timer finished ✓');
   updMini();
 }}
-function upd(){['tbig','sbig'].forEach(i=>{if($(i))$(i).textContent=fm(left)});if($('tgo'))$('tgo').textContent=run?'Pause':'Start';$('sgo').textContent=run?'Pause':'Resume';}
+function upd(){['tbig','sbig'].forEach(i=>{if($(i))$(i).textContent=fm(left)});if($('tring'))$('tring').style.strokeDashoffset=ringOff();if($('tgo'))$('tgo').textContent=run?'Pause':'Start';$('sgo').textContent=run?'Pause':'Resume';}
 function study(on){const si=selItem();$('sname').textContent=si?'🎯 '+si.t:'Focus mode';$('study').style.display=on?'flex':'none';if(on&&!run&&left==MD[tm][1]*60)tgl();upd();if('Notification'in window&&Notification.permission=='default')Notification.requestPermission()}
 function saveMind(){const v=$('mind').value.trim();if(!v)return;S.notes.unshift({id:uid(),t:v,d:new Date().toLocaleString()});$('mind').value='';save();toast('Note saved')}
 function addNoteFromSettings(){const el=$('mindSet');if(!el)return;const v=el.value.trim();if(!v)return toast('Fikr yozing');S.notes.unshift({id:uid(),t:v,d:new Date().toLocaleString()});el.value='';save();draw();toast('Fikr saqlandi')}
@@ -1475,8 +1586,8 @@ ${acc()}${bkCard()}${tools()}${shop()}<div class="card"><b>Statistics</b><div cl
 • Vocab so‘z: +1 ball
 </div></div>
 <div class="card"><b>🏆 Achievements / Darajalar</b>
-<div class="sm" style="margin:6px 0">Hozirgi: <b>Level ${Math.floor(S.pts/250)+1}</b> · ${S.pts} pts · keyingi: ${(Math.floor(S.pts/250)+1)*250} pts</div>
-${[1,2,3,4,5,6,7,8,9,10].map(l=>{const need=(l-1)*250;const ok=S.pts>=need;return `<div class="row" style="margin-top:6px;opacity:${ok?1:.45}"><span class="sp">${ok?'✅':'🔒'} Level ${l}</span><span class="sm">${need} pts</span></div>`}).join('')}
+<div class="sm" style="margin:6px 0">Hozirgi: <b>Level ${lvOf(S.pts)}</b> · ${S.pts} pts · keyingi: ${XPL(lvOf(S.pts)+1)} pts</div>
+${[1,2,3,4,5,6,7,8,9,10].map(l=>{const need=XPL(l);const ok=S.pts>=need;return `<div class="row" style="margin-top:6px;opacity:${ok?1:.45}"><span class="sp">${ok?'✅':'🔒'} Level ${l}</span><span class="sm">${need} pts</span></div>`}).join('')}
 </div>
 <div class="card"><b>Ko‘rinish</b>
 <div class="theme-picker">
@@ -1545,13 +1656,208 @@ document.body.insertAdjacentHTML('beforeend','<div id="te"></div><div id="ci"></
 /* quotes */
 const QF=[['I have fought in so many battles seeking martyrdom, and no part of my body is without a scar — yet I die in my bed. May the eyes of the cowards never sleep.','Khalid ibn al-Walid (attributed)'],['Unborn To-morrow and dead Yesterday, why fret about them if To-day be sweet!','Omar Khayyam, tr. FitzGerald'],['The Moving Finger writes; and, having writ, moves on: nor all thy piety nor wit shall lure it back to cancel half a line.','Omar Khayyam, tr. FitzGerald'],['Strength lies in justice.','Amir Temur'],['If you doubt our power, look at our buildings.','Amir Temur (attributed)'],['Stay hard.','David Goggins'],['You are in danger of living a life so comfortable and soft that you will die without ever realizing your true potential.','David Goggins'],['Suffering is the true test of life.','David Goggins'],['When your mind tells you that you are done, you are only 40% done.','David Goggins'],['Don’t stop when you’re tired. Stop when you’re done.','David Goggins'],['The mystery of human existence lies not in just staying alive, but in finding something to live for.','Fyodor Dostoevsky'],['The world breaks everyone, and afterward many are strong at the broken places.','Ernest Hemingway'],['Courage is grace under pressure.','Ernest Hemingway'],['I would rather be ashes than dust!','Jack London'],['The best way out is always through.','Robert Frost'],['Our doubts are traitors, and make us lose the good we oft might win by fearing to attempt.','William Shakespeare'],['Everyone thinks of changing the world, but no one thinks of changing himself.','Leo Tolstoy']];
 function pickQ(){const A=Math.random()<.65?QF:QT;let q;do{q=A[Math.floor(Math.random()*A.length)]}while(q[0]==lq);lq=q[0];$('qt').textContent='\u201c'+q[0]+'\u201d';$('qa').textContent=q[1]?'\u2014 '+q[1]:''}
+const QN=`Waste no more time arguing about what a good man should be. Be one.|Marcus Aurelius
+The impediment to action advances action. What stands in the way becomes the way.|Marcus Aurelius
+If it is not right, do not do it; if it is not true, do not say it.|Marcus Aurelius
+Very little is needed to make a happy life; it is all within yourself, in your way of thinking.|Marcus Aurelius
+The best revenge is not to be like your enemy.|Marcus Aurelius
+It is not that we have a short time to live, but that we waste a lot of it.|Seneca
+We suffer more often in imagination than in reality.|Seneca
+Difficulties strengthen the mind, as labor does the body.|Seneca
+While we are postponing, life speeds by.|Seneca
+No man is free who is not master of himself.|Epictetus
+First say to yourself what you would be; and then do what you have to do.|Epictetus
+Wealth consists not in having great possessions, but in having few wants.|Epictetus
+Well begun is half done.|Aristotle
+It is the mark of an educated mind to be able to entertain a thought without accepting it.|Aristotle
+Mastering others is strength; mastering yourself is true power.|Lao Tzu
+Nature does not hurry, yet everything is accomplished.|Lao Tzu
+It does not matter how slowly you go as long as you do not stop.|Confucius
+Real knowledge is to know the extent of one's ignorance.|Confucius
+The man who moves a mountain begins by carrying away small stones.|Confucius
+What you seek is seeking you.|Rumi
+The wound is the place where the Light enters you.|Rumi
+Yesterday I was clever, so I wanted to change the world. Today I am wise, so I am changing myself.|Rumi
+The Moving Finger writes; and, having writ, moves on.|Omar Khayyam (tr. FitzGerald)
+Ah, make the most of what we yet may spend, before we too into the Dust descend.|Omar Khayyam (tr. FitzGerald)
+Odamiy ersang, demagil odami, onikim, yo‘q xalq g‘amidin g‘ami.|Alisher Navoiy
+Kuch — adolatdadir.|Amir Temur
+You are in danger of living a life so comfortable and soft that you will die without ever realizing your true potential.|David Goggins
+I have not failed. I've just found 10,000 ways that won't work.|Thomas Edison
+Genius is one percent inspiration and ninety-nine percent perspiration.|Thomas Edison
+Imagination is more important than knowledge.|Albert Einstein
+Strive not to be a success, but rather to be of value.|Albert Einstein
+It always seems impossible until it's done.|Nelson Mandela
+I learned that courage was not the absence of fear, but the triumph over it.|Nelson Mandela
+I fear not the man who has practiced 10,000 kicks once, but the man who has practiced one kick 10,000 times.|Bruce Lee
+Do not pray for an easy life, pray for the strength to endure a difficult one.|Bruce Lee
+I hated every minute of training, but I said: don't quit. Suffer now and live the rest of your life as a champion.|Muhammad Ali
+Discipline is the bridge between goals and accomplishment.|Jim Rohn
+Well done is better than well said.|Benjamin Franklin
+The secret of getting ahead is getting started.|Mark Twain
+Nothing will work unless you do.|Maya Angelou
+Taking a new step, uttering a new word, is what people fear most.|Fyodor Dostoevsky
+Everyone thinks of changing the world, but no one thinks of changing himself.|Leo Tolstoy
+There is nothing noble in being superior to your fellow man; true nobility is being superior to your former self.|Ernest Hemingway
+He who has a why to live can bear almost any how.|Friedrich Nietzsche
+When we are no longer able to change a situation, we are challenged to change ourselves.|Viktor Frankl
+The struggle itself toward the heights is enough to fill a man's heart.|Albert Camus
+If you can fill the unforgiving minute with sixty seconds' worth of distance run, yours is the Earth.|Rudyard Kipling
+Do the thing and you shall have the power.|Ralph Waldo Emerson
+Dripping water hollows out stone, not through force but through persistence.|Ovid
+They can because they think they can.|Virgil
+Do nothing which is of no use.|Miyamoto Musashi
+Do what you can, with what you have, where you are.|Theodore Roosevelt
+Nothing in the world is worth having or worth doing unless it means effort, pain, difficulty.|Theodore Roosevelt
+Stay hungry, stay foolish.|Steve Jobs
+You don't have to be great to start, but you have to start to be great.|Zig Ziglar
+Whatever the mind can conceive and believe, it can achieve.|Napoleon Hill
+Strength does not come from winning. Your struggles develop your strengths.|Arnold Schwarzenegger
+I've missed more than 9,000 shots in my career. I've failed over and over again. That is why I succeed.|Michael Jordan
+Alone we can do so little; together we can do so much.|Helen Keller
+Whoever does not taste the humiliation of learning for an hour will taste the humiliation of ignorance for a lifetime.|Imam al-Shafi‘i
+The strong person is not the one who overpowers others, but the one who controls himself in anger.|Hadith (Bukhari & Muslim)
+Value five things before five: youth before old age, health before sickness, wealth before poverty, free time before busyness, life before death.|Hadith (al-Hakim)
+Mehnat — mehnatning tagi rohat.|Xalq maqoli
+Yetti o‘lchab, bir kes.|Xalq maqoli
+Oz-oz o‘rganib dono bo‘lur, qatra-qatra yig‘ilib daryo bo‘lur.|Xalq maqoli
+Bugungi ishni ertaga qoldirma.|Xalq maqoli
+Sabr tagi — sariq oltin.|Xalq maqoli
+Birlashgan o‘zar, birlashmagan to‘zar.|Xalq maqoli
+Yurgan daryo, o‘tirgan bo‘yra.|Xalq maqoli
+Hunar — hunardan unar.|Xalq maqoli
+Aytgan so‘z — otilgan o‘q.|Xalq maqoli
+Small disciplines repeated with consistency every day lead to great achievements gained slowly over time.|John C. Maxwell
+Motivation gets you started. Habit keeps you going.|Jim Ryun
+Success is the sum of small efforts, repeated day in and day out.|Robert Collier
+The only way to do great work is to love what you do.|Steve Jobs
+Don't watch the clock; do what it does. Keep going.|Sam Levenson
+Action is the foundational key to all success.|Pablo Picasso
+Fall seven times, stand up eight.|Japanese proverb
+The best time to plant a tree was twenty years ago. The second best time is now.|Proverb
+A smooth sea never made a skilled sailor.|Proverb
+Hard choices, easy life. Easy choices, hard life.|Jerzy Gregorek
+Courage is not having the strength to go on; it is going on when you don't have the strength.|Theodore Roosevelt
+Victorious warriors win first and then go to war.|Sun Tzu
+The cave you fear to enter holds the treasure you seek.|Joseph Campbell
+You can't cross the sea merely by standing and staring at the water.|Rabindranath Tagore
+If you want to conquer fear, don't sit home and think about it. Go out and get busy.|Dale Carnegie
+What we do every day matters more than what we do once in a while.|Gretchen Rubin
+Energy and persistence conquer all things.|Benjamin Franklin
+The harder I work, the luckier I get.|Samuel Goldwyn
+A year from now you may wish you had started today.|Karen Lamb
+Don't count the days; make the days count.|Muhammad Ali
+Patience is bitter, but its fruit is sweet.|Jean-Jacques Rousseau
+He who is not courageous enough to take risks will accomplish nothing in life.|Muhammad Ali
+Perseverance is not a long race; it is many short races one after the other.|Walter Elliot
+Little by little, one travels far.|J.R.R. Tolkien
+It is during our darkest moments that we must focus to see the light.|Aristotle Onassis
+Knowledge is better than wealth: knowledge guards you, while you guard wealth.|Ali ibn Abi Talib`.split('\n').map(l=>{const k=l.lastIndexOf('|');return[l.slice(0,k).trim(),l.slice(k+1).trim()]});
+const qk=q=>q[0].slice(0,48);
+function pickQ(){const A=QF.concat(QT,QN),T=ds(),map={};A.forEach(q=>map[qk(q)]=q);S.qSeen=S.qSeen||{};
+ let ord=(S.qOrder||[]).filter(k=>map[k]);const have=new Set(ord),add=Object.keys(map).filter(k=>!have.has(k));
+ for(let i=add.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[add[i],add[j]]=[add[j],add[i]]}
+ ord=ord.concat(add);S.qOrder=ord;let pos=S.qPos||0,pick=null;
+ for(let n=0;n<ord.length;n++){const k=ord[(pos+n)%ord.length],sn=S.qSeen[k];if(!sn||dd(sn,T)>=5){pick=k;pos=(pos+n+1)%ord.length;break}}
+ if(!pick){ord.forEach(k=>{if(!pick||(S.qSeen[k]||'')<(S.qSeen[pick]||''))pick=k})}
+ S.qPos=pos;S.qSeen[pick]=T;save();const q=map[pick];$('qt').textContent='\u201c'+q[0]+'\u201d';$('qa').textContent=q[1]?'\u2014 '+q[1]:''}
+const QFU=["Men shahidlik izlab ko‘p janglarda qatnashdim, tanamda yara izi bo‘lmagan joy yo‘q — ammo to‘shakda o‘lyapman. Qo‘rqoqlarning ko‘zi hech uxlamasin.", "Tug‘ilmagan ertaga va o‘lgan kechagi haqida nega g‘am yeyish kerak, agar bugun totli bo‘lsa!", "Taqdir qalami yozadi-da, o‘tib ketadi: na taqvoing, na aqling uni qaytarib, yarim satrni ham o‘chira olmaydi.", "Kuch — adolatdadir.", "Qudratimizga shubha qilsangiz, qurgan binolarimizga qarang.", "Qattiq tur, taslim bo‘lma.", "Siz shu qadar qulay va yumshoq hayot kechirish xavfi ostidasizki, haqiqiy imkoniyatingizni anglamay o‘lib ketasiz.", "Azob — hayotning haqiqiy sinovidir.", "Aqlingiz «tamom» desa, siz hali atigi 40 foizini bosib o‘tgansiz.", "Charchaganingda to‘xtama. Ishing tugaganda to‘xta.", "Inson hayotining sirri shunchaki tirik qolishda emas, balki yashash uchun nimadir topishdadir.", "Dunyo hammani sindiradi, so‘ng ko‘pchilik singan joyida kuchli bo‘lib qoladi.", "Jasorat — bosim ostidagi viqor.", "Men chang bo‘lgandan ko‘ra kul bo‘lganim afzal!", "Eng yaxshi chiqish yo‘li — doim undan o‘tib ketishdir.", "Shubhalarimiz xoinlardir: urinishdan qo‘rqib, ko‘pincha yutishimiz mumkin bo‘lgan narsani boy beramiz.", "Hamma dunyoni o‘zgartirishni o‘ylaydi, ammo hech kim o‘zini o‘zgartirishni o‘ylamaydi."];
+const QZ=`Lost time is never found again.|Yo‘qotilgan vaqt hech qachon qaytib topilmaydi.|Benjamin Franklin
+Do not squander time, for that is the stuff life is made of.|Vaqtni sovurma — hayot aynan shundan to‘qilgan.|Benjamin Franklin
+Well done is better than well said.|Yaxshi qilingan ish chiroyli aytilgandan afzal.|Benjamin Franklin
+Energy and persistence conquer all things.|Shijoat va qat’iyat hamma narsani yengadi.|Benjamin Franklin
+An investment in knowledge pays the best interest.|Bilimga qo‘yilgan sarmoya eng yaxshi foyda keltiradi.|Benjamin Franklin
+Diligence is the mother of good luck.|Tirishqoqlik — omadning onasi.|Benjamin Franklin
+Either write something worth reading or do something worth writing.|Yo o‘qishga arziydigan narsa yoz, yo yozishga arziydigan ish qil.|Benjamin Franklin
+Hide not your talents; they for use were made. What's a sundial in the shade?|Iste’dodingni yashirma — u foydalanish uchun berilgan. Soyadagi quyosh soati nimaga kerak?|Benjamin Franklin
+It is better to offer no excuse than a bad one.|Yomon uzr aytgandan, umuman uzr aytmagan yaxshi.|George Washington
+Be courteous to all, but intimate with few.|Hammaga xushmuomala bo‘l, lekin kam kishi bilan yaqin bo‘l.|George Washington
+Labor to keep alive in your breast that little spark of celestial fire called conscience.|Ko‘kragingdagi vijdon deb ataladigan samoviy olovning uchqunini so‘ndirmaslikka intil.|George Washington
+Discipline is the soul of an army.|Intizom — qo‘shinning joni.|George Washington
+Never put off till tomorrow what you can do today.|Bugun qila oladigan ishingni ertaga qoldirma.|Thomas Jefferson
+It is wonderful how much may be done if we are always doing.|Doim harakat qilsak, naqadar ko‘p ish qilish mumkin — bu ajoyib.|Thomas Jefferson
+In matters of style, swim with the current; in matters of principle, stand like a rock.|Uslubda oqim bilan suz, tamoyilda esa qoya kabi tur.|Thomas Jefferson
+When angry, count ten before you speak; if very angry, a hundred.|G‘azablansang, gapirishdan oldin o‘nni sana; qattiq g‘azablansang — yuzni.|Thomas Jefferson
+Honesty is the first chapter in the book of wisdom.|Halollik — donolik kitobining birinchi bobi.|Thomas Jefferson
+Facts are stubborn things.|Faktlar — o‘jar narsalar.|John Adams
+Great necessities call out great virtues.|Katta ehtiyojlar katta fazilatlarni uyg‘otadi.|Abigail Adams
+Learning is not attained by chance; it must be sought for with ardor and attended to with diligence.|Bilim tasodifan kelmaydi: uni ishtiyoq bilan izlash va tirishqoqlik bilan o‘rganish kerak.|Abigail Adams
+Knowledge will forever govern ignorance.|Bilim doim jaholat ustidan hukmron bo‘ladi.|James Madison
+When I have a subject in hand, I study it profoundly. Day and night it is before me.|Biror mavzu qo‘limga tushsa, uni chuqur o‘rganaman. Kechayu kunduz u ko‘z oldimda turadi.|Alexander Hamilton
+The harder the conflict, the more glorious the triumph.|Kurash qancha og‘ir bo‘lsa, g‘alaba shuncha shonlidir.|Thomas Paine
+What we obtain too cheap, we esteem too lightly.|Arzon qo‘lga kiritganimizni past baholaymiz.|Thomas Paine
+These are the times that try men's souls.|Bu — insonlarning ruhini sinaydigan zamonlar.|Thomas Paine
+Give me liberty, or give me death!|Menga erkinlik bering, yoki o‘limni!|Patrick Henry
+I am a slow walker, but I never walk back.|Men sekin yuraman, lekin hech qachon orqaga yurmayman.|Abraham Lincoln
+Whatever you are, be a good one.|Kim bo‘lsang ham, yaxshisi bo‘l.|Abraham Lincoln
+The only thing we have to fear is fear itself.|Qo‘rqishimiz kerak bo‘lgan yagona narsa — qo‘rquvning o‘zi.|Franklin D. Roosevelt
+Go confidently in the direction of your dreams.|Orzularing yo‘nalishida ishonch bilan yur.|Henry David Thoreau
+Do the thing and you shall have the power.|Ishni qil — kuch o‘zi keladi.|Ralph Waldo Emerson
+Do what you can, with what you have, where you are.|Qo‘lingdan kelganini, bor narsang bilan, turgan joyingda qil.|Theodore Roosevelt
+Nothing in the world is worth having or worth doing unless it means effort, pain, difficulty.|Dunyoda mehnat, og‘riq va qiyinchilik talab qilmaydigan hech narsa qadrga ham, qilishga ham arzimaydi.|Theodore Roosevelt
+The unexamined life is not worth living.|O‘zini tekshirmagan hayot yashashga arzimaydi.|Socrates
+The beginning is the most important part of the work.|Boshlanish — ishning eng muhim qismi.|Plato
+We are what we repeatedly do. Excellence, then, is not an act, but a habit.|Biz takror-takror qiladigan ishimizmiz. Demak, mukammallik — bir martalik harakat emas, odatdir.|Will Durant on Aristotle
+Well begun is half done.|Yaxshi boshlash — ishning yarmi.|Aristotle
+Waste no more time arguing about what a good man should be. Be one.|Yaxshi inson qanday bo‘lishi haqida bahslashib vaqt o‘tkazma. O‘zing shunday bo‘l.|Marcus Aurelius
+What stands in the way becomes the way.|To‘siq bo‘lgan narsa yo‘lga aylanadi.|Marcus Aurelius
+Very little is needed to make a happy life; it is all within yourself.|Baxtli hayot uchun juda oz narsa kerak; hammasi o‘zingda.|Marcus Aurelius
+We suffer more often in imagination than in reality.|Biz haqiqatdan ko‘ra ko‘proq tasavvurimizda azob chekamiz.|Seneca
+It is not that we have a short time to live, but that we waste much of it.|Hayotimiz qisqa emas — biz uning ko‘pini behuda sarflaymiz.|Seneca
+Difficulties strengthen the mind, as labor does the body.|Qiyinchiliklar aqlni mustahkamlaydi, xuddi mehnat tanani mustahkamlagani kabi.|Seneca
+No man is free who is not master of himself.|O‘zining xo‘jayini bo‘lmagan odam ozod emas.|Epictetus
+First say to yourself what you would be; then do what you have to do.|Avval kim bo‘lmoqchiligingni o‘zingga ayt; so‘ng qilishing kerak bo‘lgan ishni qil.|Epictetus
+If you have a garden and a library, you have everything you need.|Bog‘ing va kutubxonang bo‘lsa, hamma narsang bor.|Cicero
+While there is life, there is hope.|Hayot bor ekan, umid bor.|Cicero
+No man ever steps in the same river twice.|Hech kim bir daryoga ikki marta kirmaydi.|Heraclitus
+Dare to know! Have courage to use your own understanding.|Bilishga jur’at et! O‘z aqling bilan yashashga jasorating bo‘lsin.|Immanuel Kant
+Perfect is the enemy of good.|Mukammallik — yaxshining dushmani.|Voltaire
+I think, therefore I am.|Men o‘ylayman, demak, mavjudman.|René Descartes
+He who has a why to live can bear almost any how.|Yashashga sababi borga deyarli har qanday azob oson.|Friedrich Nietzsche
+Knowing is not enough; we must apply. Willing is not enough; we must do.|Bilish yetarli emas — qo‘llash kerak. Xohlash yetarli emas — qilish kerak.|Johann Wolfgang von Goethe
+Things which matter most must never be at the mercy of things which matter least.|Eng muhim narsalar eng ahamiyatsizlarining ixtiyorida qolmasligi kerak.|Johann Wolfgang von Goethe
+Never give in — never, never, never, never, except to convictions of honour and good sense.|Hech qachon taslim bo‘lma — faqat or-nomus va aql-idrok talabigagina bo‘ysun.|Winston Churchill
+Impossible is a word to be found only in the dictionary of fools.|«Imkonsiz» so‘zi faqat ahmoqlar lug‘atida bor.|Napoleon Bonaparte
+Victory belongs to the most persevering.|G‘alaba eng qat’iyatlilarniki.|Napoleon Bonaparte
+A man who dares to waste one hour of time has not discovered the value of life.|Bir soat vaqtni behuda sarflashga jur’at etgan odam hayotning qadrini bilmaydi.|Charles Darwin
+If I have seen further, it is by standing on the shoulders of giants.|Agar men uzoqroqni ko‘rgan bo‘lsam, bu devlarning yelkasida turganim uchundir.|Isaac Newton
+Learning never exhausts the mind.|O‘rganish aqlni hech charchatmaydi.|Leonardo da Vinci
+Ancora imparo — I am still learning.|Men hali ham o‘rganyapman.|Michelangelo
+There is nothing either good or bad, but thinking makes it so.|Yaxshi ham, yomon ham yo‘q — uni fikrlash shunday qiladi.|William Shakespeare
+To thine own self be true.|O‘zingga sodiq bo‘l.|William Shakespeare
+Better three hours too soon than a minute too late.|Bir daqiqa kech qolgandan ko‘ra, uch soat erta kelgan yaxshi.|William Shakespeare
+Even the darkest night will end and the sun will rise.|Eng qora tun ham tugaydi va quyosh chiqadi.|Victor Hugo
+Progress is impossible without change, and those who cannot change their minds cannot change anything.|O‘zgarishsiz taraqqiyot yo‘q; fikrini o‘zgartira olmaganlar hech narsani o‘zgartira olmaydi.|George Bernard Shaw
+Nothing in life is to be feared, it is only to be understood.|Hayotda hech narsadan qo‘rqmaslik kerak — uni faqat tushunish kerak.|Marie Curie
+Imagination is more important than knowledge.|Tasavvur bilimdan muhimroq.|Albert Einstein
+All things excellent are as difficult as they are rare.|Barcha a’lo narsalar qanchalik nodir bo‘lsa, shunchalik qiyin.|Baruch Spinoza
+Talent hits a target no one else can hit; genius hits a target no one else can see.|Iste’dod hech kim ura olmaydigan nishonni uradi; daho hech kim ko‘rmagan nishonni ko‘radi.|Arthur Schopenhauer
+Dripping water hollows out stone, not through force but through persistence.|Tomchi toshni kuch bilan emas, qat’iyat bilan o‘yadi.|Ovid
+Little by little, one travels far.|Oz-ozdan uzoqqa boriladi.|J.R.R. Tolkien
+What you seek is seeking you.|Sen izlayotgan narsa seni izlayapti.|Rumi
+Yesterday I was clever, so I wanted to change the world. Today I am wise, so I am changing myself.|Kecha aqlli edim — dunyoni o‘zgartirmoqchi bo‘ldim. Bugun dono bo‘ldim — o‘zimni o‘zgartiryapman.|Rumi
+If you are human, do not call yourself human unless you grieve for the people's sorrow.|Odamiy ersang, demagil odami, onikim, yo‘q xalq g‘amidin g‘ami.|Alisher Navoiy
+Knowledge is better than wealth: it guards you, while you guard wealth.|Ilm boylikdan afzal: ilm seni qo‘riqlaydi, boylikni esa sen qo‘riqlaysan.|Ali ibn Abi Talib (attributed)
+The strong person is the one who controls himself in anger.|Kuchli odam — g‘azab paytida o‘zini tuta oladigan kishidir.|Hadith (Bukhari & Muslim)
+The best of deeds are those done consistently, even if small.|Amallarning eng yaxshisi — kichik bo‘lsa ham doimiy bo‘lganidir.|Hadith (Bukhari & Muslim)
+Rest lies at the end of labor.|Mehnat — mehnatning tagi rohat.|Xalq maqoli
+Measure seven times, cut once.|Yetti o‘lchab, bir kes.|Xalq maqoli
+Little by little a stream becomes a river.|Oz-oz o‘rganib dono bo‘lur, qatra-qatra yig‘ilib daryo bo‘lur.|Xalq maqoli
+At the end of patience lies gold.|Sabr tagi — sariq oltin.|Xalq maqoli`.split('\n').map(l=>l.split('|'));
+function pickQ(){const A=QF.map((q,i)=>[q[0],QFU[i]||'',q[1]]).concat(QZ),T=ds(),map={};A.forEach(q=>map[qk(q)]=q);S.qSeen=S.qSeen||{};
+ let ord=(S.qOrder||[]).filter(k=>map[k]);const have=new Set(ord),add=Object.keys(map).filter(k=>!have.has(k));
+ for(let i=add.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[add[i],add[j]]=[add[j],add[i]]}
+ ord=ord.concat(add);S.qOrder=ord;let pos=S.qPos||0,pick=null;
+ for(let n=0;n<ord.length;n++){const k=ord[(pos+n)%ord.length],sn=S.qSeen[k];if(!sn||dd(sn,T)>=5){pick=k;pos=(pos+n+1)%ord.length;break}}
+ if(!pick){ord.forEach(k=>{if(!pick||(S.qSeen[k]||'')<(S.qSeen[pick]||''))pick=k})}
+ S.qPos=pos;S.qSeen[pick]=T;save();const q=map[pick];
+ $('qt').innerHTML='<div class="qe">\u201c'+E(q[0])+'\u201d</div>'+(q[1]?'<div class="qu">'+E(q[1])+'</div>':'');$('qa').textContent=q[2]?'\u2014 '+q[2]:''}
 /* soul hit + penalties (vocab penalty adds 50 words to the vocab target) */
 function hit(n,meta){meta=meta||{};
 const day=meta.day||ds(),src=meta.src||'',sid=meta.sid||'';
 /* one pending penalty per source item per day (Plan B may pass force:2) */
 const already=(S.pen||[]).filter(p=>!p.d&&p.src===src&&p.sid===sid&&p.day===day).length;
 const need=meta.force||1;
-if(already>=need)return;
 const add=need-already;
 /* Soul only when: next-day check-in (fromCI) or explicit miss (forceSoul). Same-day auto-penalty = task only. */
 const doSoul=!!(meta.fromCI||meta.forceSoul);
@@ -1561,6 +1867,8 @@ if(meta.soul!=null) soulAmt=Math.max(1,Math.min(5,+meta.soul));
 else if(meta.diff!=null) soulAmt=(+meta.diff)>=3?3:2;
 else if(src==='habit'&&sid){const hh=S.habits.find(x=>x.id==sid);if(hh) soulAmt=(hh.diff||2)>=3?3:2;}
 else if(src==='task'&&sid){const tt=S.tasks.find(x=>x.id==sid);if(tt&&tt.pri!=null) soulAmt=(tt.pri<=2)?3:2;} /* lower pri number = higher priority = harder? */
+if(doSoul){const ex=(S.pen||[]).filter(p=>!p.d&&p.src===src&&p.sid===sid&&p.day===day&&!p.soulHit);ex.forEach(p=>{p.soulHit=1;p.soul=soulAmt;S.hp=Math.max(0,S.hp-soulAmt)});if(ex.length){const h=$('heart');if(h){h.classList.remove('hit');void h.offsetWidth;h.classList.add('hit')}if(S.hp==0){S.hp=25;S.pts=Math.max(0,S.pts-50);toast('Out of soul! −50 points, soul restored to 25')}}}
+if(add<=0)return;
 for(let i=0;i<add;i++){
   if(doSoul){S.hp=Math.max(0,S.hp-soulAmt)}
   const t=PEN[Math.floor(Math.random()*PEN.length)],v=/vocab/i.test(t);
@@ -1572,18 +1880,28 @@ if(doSoul&&S.hp==0){S.hp=25;S.pts=Math.max(0,S.pts-50);toast('Out of soul! −50
 }
 function negH(i){const h=S.habits.find(x=>x.id==i);if(!h)return;h.streak=0;S.pts=Math.max(0,S.pts-5);const sa=(h.diff||2)>=3?3:2;hit(h.t,{src:'habit',sid:h.id,day:ds(),forceSoul:1,diff:h.diff||2,soul:sa});save();draw();toast('Soul −'+sa+' · penalty assigned')}
 async function clearAll(){if(!confirm('All data will be erased on this device and in your cloud account. Continue?'))return;clearTimeout(st);const th=S.theme;Object.keys(S).forEach(k=>delete S[k]);Object.assign(S,{tasks:[],habits:[],notes:[],fin:[],pen:[],hp:50,pts:0,coins:0,tas:0,tasTarget:S.tasTarget||0,vb:S.vb||50,focus:0,plan:{},theme:th,vd:[],rew:[],wish:[]});try{save()}catch(e){}if(AU){busy=0;try{await sync()}catch(e){}}try{localStorage.removeItem(K)}catch(e){}location.reload()}
-/* yesterday check-in */
+/* yesterday check-in (once per day; unmarked = not done) */
+function ciLists(){const T=ds(),Y=yest();
+ const L=S.tasks.filter(t=>t.type!='event'&&t.date<T&&!t.done&&!t.miss&&!t.ci).sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:(a.st??0)-(b.st??0));
+ const HL=S.habits.filter(h=>{normH(h);return due(h,Y)&&h.last!=Y&&h.ciDay!==Y});return{L,HL}}
+function ciCnt(){const n=$('ciN');if(!n)return;const tot=document.querySelectorAll('#ci [data-ci]').length,m=Object.keys(CI).length;n.textContent=m>=tot?'Hammasi belgilandi':(tot-m)+' ta belgilanmagan — “qilinmadi” bo‘ladi'}
 function showCI(){const T=ds(),Y=yest();
-if(S.lastCI===T) return showQ();
-const L=S.tasks.filter(t=>t.type!='event'&&t.date<T&&!t.done&&!t.miss&&!t.ci).sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:(a.st??0)-(b.st??0));
-const HL=S.habits.filter(h=>{normH(h);return due(h,Y)&&h.last!=Y&&h.ciDay!==Y});
-if(!L.length&&!HL.length){S.lastCI=T;save(1);return showQ();}
-CI={};const c=$('ci');c.style.display='flex';
-
-const hab=HL.map(h=>`<div class="card" style="margin-bottom:10px"><div style="margin-bottom:10px"><b>🔥 ${E(h.t)}</b><div class="sm">Odat · kecha</div></div><div class="g"><button id="cyh${h.id}" onclick="ciSet('h${h.id}',1)" class="p" style="flex:1">✓ Qildim</button><button id="cnh${h.id}" class="d" onclick="ciSet('h${h.id}',0)" style="flex:1">✗ Qilmadim</button></div></div>`).join('');
-c.innerHTML=`<div class="card" style="width:min(94vw,440px);max-height:86vh;overflow:auto;border-color:var(--a)"><h2 style="margin:0 0 4px;font-size:20px">Kecha qanday o‘tdi?</h2><div class="sm" style="margin-bottom:12px;opacity:.9">Qilganlaringizni belgilang. Belgilanmaganlar “qilinmagan” deb hisoblanadi.</div>${hab}${L.map(t=>`<div class="card row"><div class="sp"><b>${E(t.t)}</b><div class="sm">${t.date}${t.st!=null?' · '+tm2(t.st)+(t.en!=null?'–'+tm2(t.en):''):''}</div></div><button id="cy${t.id}" onclick="ciSet('${t.id}',1)" class="p">✓ Qildim</button><button id="cn${t.id}" class="d" onclick="ciSet('${t.id}',0)">✗ Qilmadim</button></div>`).join('')}<button class="p" style="width:100%" onclick="ciGo()" style="width:100%;margin-top:16px;padding:15px;font-size:16px;font-weight:700;border-radius:14px;letter-spacing:.02em">Kunni boshlash ▶</button></div>`}
-function ciSet(i,v){CI[i]=v;const pref=String(i).startsWith('h')?'h':'';const id=String(i).replace(/^h/,'');const y=$(pref==='h'?'cyh'+id:'cy'+id),n=$(pref==='h'?'cnh'+id:'cn'+id);if(y){y.className=v===1?'p':'';y.style.opacity=v===1?'1':'.65'}if(n){n.className=v===0?'d':'';n.style.opacity=v===0?'1':'.65'}}
-function ciGo(){const T=ds(),Y=yest();
+try{if(localStorage.getItem('intizomCI')===T)S.lastCI=T}catch(e){}
+if(S.lastCI===T)return showQ();
+const{L,HL}=ciLists();
+if(!L.length&&!HL.length){CI={};return ciGo(1)}
+if(S.ciShown===T){CI=S.ciDraft||{};return ciGo(1)}
+S.ciShown=T;S.ciDraft={};CI=S.ciDraft;save();
+const seg=(k,sfx)=>`<div class="ci-seg" data-ci="1"><button id="cy${sfx}${k}" onclick="ciSet('${sfx}${k}',1)">✓ Qildim</button><button id="cn${sfx}${k}" onclick="ciSet('${sfx}${k}',0)">✗ Qilmadim</button></div>`;
+const hab=HL.map(h=>`<div class="ci-it"><div><b>🔥 ${E(h.t)}</b><div class="sm">Odat · kecha</div></div>${seg(h.id,'h')}</div>`).join('');
+const tk=L.map(t=>`<div class="ci-it"><div><b>${E(t.t)}</b><div class="sm">${t.date}${t.st!=null?' · '+tm2(t.st)+(t.en!=null?'–'+tm2(t.en):''):''}</div></div>${seg(t.id,'')}</div>`).join('');
+const c=$('ci');c.style.display='flex';
+c.innerHTML=`<div class="ci-box"><div class="ci-h"><h2>Kecha qanday o‘tdi?</h2><div class="sm">Faqat kechagi va undan oldingi ishlar. Bugungilar so‘ralmaydi.</div></div><div class="ci-l">${hab}${tk}</div><div class="ci-f"><div class="sm" id="ciN" style="text-align:center;margin-bottom:8px"></div><button class="ci-go" onclick="ciGo()">Kunni boshlash ▶</button></div></div>`;ciCnt()}
+function ciSet(i,v){CI[i]=v;S.ciDraft=CI;save();const pref=String(i).startsWith('h')?'h':'';const id=String(i).replace(/^h/,'');const y=$('cy'+pref+id),n=$('cn'+pref+id);if(y)y.className=v===1?'on-y':'';if(n)n.className=v===0?'on-n':'';ciCnt()}
+function ciGo(auto){const T=ds(),Y=yest();
+if(S.lastCI===T){const c=$('ci');if(c)c.style.display='none';return}
+const M=S.tasks.filter(t=>t.type!='event'&&t.date<T&&!t.done&&t.miss&&!t.ci);
+M.forEach(t=>{t.ci=1;hit(t.t,{src:'task',sid:t.id,day:t.date,fromCI:1})});
 S.tasks.filter(t=>t.type!='event'&&t.date<T&&!t.done&&!t.miss&&!t.ci).forEach(t=>{
   t.ci=1;
   if(CI[t.id]==1) doneT(t.id);
@@ -1602,8 +1920,9 @@ S.habits.forEach(h=>{
     }
   }
 });
-S.lastCI = T;
-$('ci').style.display='none';
+S.lastCI = T;S.ciDraft={};CI={};
+try{localStorage.setItem('intizomCI',T)}catch(e){}
+const c=$('ci');if(c)c.style.display='none';
 save(); hdr(); draw(); showQ();
 }
 /* tasks: daily view, month view, sheet */
