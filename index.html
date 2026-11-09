@@ -174,6 +174,22 @@ button:disabled{opacity:.35;cursor:default}
 #miniPom button.p{background:var(--a);color:#0a0a0a}
 #miniPom button:active{transform:scale(.93)}
 #miniPom .mp-close{background:var(--b);color:var(--m);padding:6px 9px;font-weight:600}
+#miniPom.mp-done{animation:mpDone .7s ease-in-out infinite alternate}@keyframes mpDone{from{box-shadow:0 0 0 0 rgba(184,242,90,.0)}to{box-shadow:0 0 0 6px rgba(184,242,90,.55);transform:translateX(-50%) scale(1.06)}}
+#undoBar{position:fixed;left:50%;bottom:calc(176px + env(safe-area-inset-bottom,0px));width:max-content;transform:translateX(-50%);z-index:60;display:none;align-items:center;gap:12px;padding:10px 12px 12px 16px;border-radius:16px;background:#1b2330;color:#e8edf5;border:1px solid #2c3a4f;box-shadow:0 10px 30px rgba(0,0,0,.45);max-width:92vw;overflow:hidden;animation:fadeUp .2s ease}
+#undoBar .ul{font-size:14px;font-weight:600;white-space:nowrap}
+#undoBar button{border:0;background:var(--a);color:#0a0a0a;font-weight:800;border-radius:11px;padding:8px 14px;white-space:nowrap}
+#undoBar i{position:absolute;left:0;bottom:0;height:3px;width:100%;background:var(--a);transform-origin:left}
+@keyframes undoBar{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+.nf-img{max-width:100%;max-height:200px;border-radius:10px;display:block;margin-top:6px;cursor:pointer;background:var(--b)}
+.nf-chip{display:flex;align-items:center;gap:6px;margin-top:6px;padding:7px 10px;border-radius:10px;font-size:13px;text-align:left;max-width:100%;word-break:break-all}
+.nf-x{border:0;background:none;color:var(--m);padding:0 4px;font-size:12px;opacity:.7}
+.stg{display:flex;flex-wrap:wrap;gap:6px;padding:8px 10px 0;border-top:1px solid var(--b)}
+.stg span{display:inline-flex;align-items:center;gap:6px;background:var(--b);border-radius:10px;padding:4px 6px 4px 10px;font-size:12.5px;max-width:100%}
+.stg button{border:0;background:none;padding:0 4px;color:var(--m)}
+.ach-it{display:flex;gap:12px;align-items:center}.ach-ic{font-size:28px;width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:var(--b);flex:none}
+.ach-it.lock{opacity:.55}.ach-it.lock .ach-ic{filter:grayscale(1)}
+.wl-d .sp input{text-decoration:line-through;opacity:.6}
+.tsr{padding:11px 0;border-bottom:1px solid var(--b)}.tsr:last-child{border-bottom:0}.tsn{width:76px;text-align:center}
 
 .cal-event{cursor:grab;user-select:none;-webkit-user-select:none}
 .cal-event:active{cursor:grabbing;opacity:.92;z-index:5}
@@ -549,7 +565,7 @@ var t=s.theme;if(t==='qogoz'||t==='tun'||t==='mono')document.documentElement.dat
 <input id="mind" placeholder="What’s on your mind?"><button class="p" onclick="saveMind()">Save note</button>
 <div class="row"><button onclick="tgl()" id="sgo">Pause</button><button onclick="study(0)">Exit</button></div></div>
 <div id="fl"><div class="sm" style="color:#9ab;font-size:15px" id="flt"></div><div id="fls"></div><div class="sm" id="fln" style="color:#789"></div><div class="row"><button onclick="FLC()">Cancel</button><button onclick="FLK()">Skip</button></div></div>
-<div id="win"><div id="wp"></div><div class="gl">🍅</div><h2 style="margin:0">Pomodoro complete!</h2><div style="color:#9fe">25 min of focus · +5 points</div><div class="sm" style="color:#9ab">Time for a short break. You did it!</div><button class="p" onclick="$('win').style.display='none'">Continue</button></div>
+<div id="win"><div id="wp"></div><div class="gl">🍅</div><h2 style="margin:0">Pomodoro complete!</h2><div style="color:#9fe" id="winTxt">25 min of focus · +5 points</div><div class="sm" style="color:#9ab" id="winSub">Time for a short break. You did it!</div><button class="p" onclick="$('win').style.display='none'">Continue</button></div>
 <div id="qm"><div class="card" style="width:min(90vw,420px);border-color:var(--a)"><div class="row"><h2 style="margin:0" class="sp">Words to live by</h2><button onclick="closeQ()">✕</button></div><div class="card" id="qt" style="margin:12px 0 6px;font-size:18px;line-height:1.5"></div><div class="sm" id="qa" style="text-align:right;margin-bottom:12px"></div><div class="g"><button onclick="pickQ()">Another quote</button><button class="p" onclick="closeQ()">Continue</button></div></div></div>
 <div id="he"></div>
 <div id="toast"></div>
@@ -688,10 +704,12 @@ display:flex;align-items:center;justify-content:center;overflow:hidden;user-sele
 button{border:0;border-radius:11px;padding:7px 12px;font-size:14px;font-weight:700;cursor:pointer;background:#1a2330;color:#e8edf5;min-width:40px}
 button.p{background:#b8f25a;color:#0a0a0a}
 button.x{padding:7px 10px;color:#8b9bb0;font-weight:600}
-button:active{filter:brightness(.9)}`;
+button:active{filter:brightness(.9)}
+body.done{animation:pd .7s ease-in-out infinite alternate}@keyframes pd{from{background:#0a0e14}to{background:#24571f}}`;
       doc.head.innerHTML='<style>'+css+'</style>';
       doc.body.innerHTML='<div class="shell"><div class="meta"><div class="time" id="pipTime">'+fm(left)+'</div><div class="label" id="pipLabel">'+(MD[tm]?MD[tm][0]:'Timer')+'</div></div><div class="btns"><button class="p" id="pipPlay">'+(run?'⏸':'▶')+'</button><button class="x" id="pipClose">✕</button></div></div>';
-      doc.getElementById('pipPlay').onclick=function(){tgl();updMini()};
+      doc.getElementById('pipPlay').onclick=function(){unlockAudio();tgl(1);updMini()};
+      doc.addEventListener('pointerdown',unlockAudio);
       doc.getElementById('pipClose').onclick=function(){closeMiniPom()};
       w.addEventListener('pagehide',function(){pipWin=null;saveTimer()});
       const el=$('miniPom'); if(el) el.style.display='none';
@@ -746,41 +764,34 @@ function closeMiniPom(){
   updateMediaSession();
 }
 
-function updMini(){
-  const sec=left|0;
-  /* PiP window */
+let miniMsg='',miniMsgUntil=0;
+function updMini(fromTick){
+  const lab=(miniMsgUntil>Date.now())?miniMsg:(MD[tm]?MD[tm][0]:'Timer'),txt=fm(left),ic=run?'⏸':'▶';
+  /* PiP window — updated on every tick (this was the "frozen time" bug) */
   if(pipWin && !pipWin.closed){
     try{
-      const t=pipWin.document.getElementById('pipTime');
-      const l=pipWin.document.getElementById('pipLabel');
-      const b=pipWin.document.getElementById('pipPlay');
-      if(t) t.textContent=fm(left);
-      if(l) l.textContent=MD[tm]?MD[tm][0]:'Timer';
-      if(b) b.textContent=run?'⏸':'▶';
+      const d=pipWin.document,t=d.getElementById('pipTime'),l=d.getElementById('pipLabel'),b=d.getElementById('pipPlay');
+      if(t&&t.textContent!==txt) t.textContent=txt;
+      if(l&&l.textContent!==lab) l.textContent=lab;
+      if(b&&b.textContent!==ic) b.textContent=ic;
     }catch(e){}
   }
-  /* In-page mini — only rebuild DOM when second changes or first paint */
+  /* In-page mini — build once, afterwards only change text (rebuilding every second used to swallow button clicks) */
   const el=$('miniPom');
   if(el && el.style.display!=='none'){
-    if(sec!==lastMiniSec || !el.querySelector('.mp-time')){
-      lastMiniSec=sec;
+    if(!el.querySelector('.mp-time')){
       el.innerHTML='<span class="mp-grip" title="Surib ko‘chiring">⠿</span>'+
-        '<div class="mp-col"><span class="mp-time">'+fm(left)+'</span><span class="mp-label">'+(MD[tm]?MD[tm][0]:'')+'</span></div>'+
-        '<button class="p" onclick="event.stopPropagation();tgl();updMini()">'+(run?'⏸':'▶')+'</button>'+
+        '<div class="mp-col"><span class="mp-time"></span><span class="mp-label"></span></div>'+
+        '<button class="p" onclick="event.stopPropagation();unlockAudio();tgl(1);updMini()"></button>'+
         '<button class="mp-close" onclick="event.stopPropagation();closeMiniPom()">✕</button>';
-    } else {
-      const t=el.querySelector('.mp-time');
-      if(t) t.textContent=fm(left);
-      const b=el.querySelector('button.p');
-      if(b) b.textContent=run?'⏸':'▶';
     }
+    const t=el.querySelector('.mp-time'),l=el.querySelector('.mp-label'),b=el.querySelector('button.p');
+    if(t&&t.textContent!==txt) t.textContent=txt;
+    if(l&&l.textContent!==lab) l.textContent=lab;
+    if(b&&b.textContent!==ic) b.textContent=ic;
   }
-  updateMediaSession();
+  if(!fromTick) updateMediaSession();
   if(run && document.hidden) showLiveTimerNotif(false);
-  if(run){
-    cancelAnimationFrame(miniRaf);
-    miniRaf=requestAnimationFrame(function(){ /* soft throttle via lastMiniSec */ });
-  }
 }
 
 function initMiniDrag(el){
@@ -910,9 +921,9 @@ S.pen=(S.pen||[]).filter(p=>{
   });
 })();
 save(1);hdr();remind()}
-function go(t,fromPop){if(t==='more'){showMoreSheet();return}if(t===tab&&!fromPop&&$('m').innerHTML)return;const prev=tab;tab=t;window.cosBoost&&cosBoost();const navOn=['vocab','shadow','fin','settings','hero'].includes(t)?'more':t;closeMoreSheet();$('nav').innerHTML=TABS.map(x=>`<button class="${x[0]==navOn?'on':''}" onclick="go('${x[0]}')"><b>${x[1]}</b>${x[2]}</button>`).join('');draw();tabAnim();if(!fromPop){try{history.pushState({tab:t},'',location.pathname+(t==='tasks'?'':'#'+t))}catch(e){}}}
+function go(t,fromPop){if(t==='more'){showMoreSheet();return}if(t===tab&&!fromPop&&$('m').innerHTML)return;const prev=tab;tab=t;window.cosBoost&&cosBoost();const navOn=['vocab','shadow','fin','settings','hero','ach','wl'].includes(t)?'more':t;closeMoreSheet();$('nav').innerHTML=TABS.map(x=>`<button class="${x[0]==navOn?'on':''}" onclick="go('${x[0]}')"><b>${x[1]}</b>${x[2]}</button>`).join('');draw();tabAnim();if(!fromPop){try{history.pushState({tab:t},'',location.pathname+(t==='tasks'?'':'#'+t))}catch(e){}}}
 function hrOpts(sel,none){let o=none?`<option value="">${none}</option>`:'';for(let i=0;i<24;i++)o+=`<option value="${i}" ${sel===i?'selected':''}>${String(i).padStart(2,'0')}:00</option>`;return o}
-function draw(){hdr();$('m').innerHTML=({tasks:vTasks,habits:vHabits,plan:vPlan,timer:vTimer,fin:vFin,more:vMore,vocab:vVocab,shadow:vShadow,settings:vSettings,hero:vHero})[tab]();if(tab==='hero'){heroPost();if(!S.onb)showOnb(0)}}
+function draw(){hdr();$('m').innerHTML=({tasks:vTasks,habits:vHabits,plan:vPlan,timer:vTimer,fin:vFin,more:vMore,vocab:vVocab,shadow:vShadow,settings:vSettings,hero:vHero,ach:vAch,wl:vWl})[tab]();if(tab==='hero'){heroPost();if(!S.onb)showOnb(0)}}
 /* TASKS */
 let tv='day';
 function vTasks(){const sw='<div class="tabs">'+[['day','Daily'],['mon','Monthly'],['mat','Matrix']].map(x=>`<button class="${tv==x[0]?'on':''}" onclick="tv='${x[0]}';draw()">${x[1]}</button>`).join('')+'</div>';return sw+(tv=='mon'?vMon():tv=='mat'?vMat():vTasksDay())}
@@ -1401,33 +1412,47 @@ function setP(h,v){const T=cd;S.plan[T]=S.plan[T]||{};S.plan[T][h]=v;save()}
 function bplan(){startPlanB()}
 function allShift(){S.tasks.filter(t=>!t.done&&t.date==ds()).forEach(t=>{t.hour=Math.min(23,(t.hour??new Date().getHours())+1);if(t.st!=null){t.st+=60;if(t.en!=null)t.en+=60}t.miss=0});save();draw()}
 /* TIMER */
-const MD={pom:['Pomodoro',25],sb:['Short break',5],lb:['Long break',15]};let left=1500,run=0,end=0,iv;
+const MD={pom:['Pomodoro',25],sb:['Short break',5],lb:['Long break',15]};let left=1500,run=0,end=0,iv,tw=null,lastTickSec=-1;
+/* Timer settings (stored in S.ts so they sync with the cloud backup too) */
+function TSET(){S.ts=Object.assign({ap:0,ab:0,pom:25,sb:5,lb:15,ev:4,snd:1,vib:1},S.ts||{});return S.ts}
+function applyTS(){const t=TSET();MD.pom[1]=t.pom;MD.sb[1]=t.sb;MD.lb[1]=t.lb}
+applyTS();if(!run)left=MD.pom[1]*60;
+/* Ticker runs in a Worker: browsers throttle setInterval in background tabs / behind a PiP window, workers are not throttled */
+function startTicker(){stopTicker();
+  try{const u=URL.createObjectURL(new Blob(['const i=setInterval(()=>postMessage(1),250);onmessage=e=>{if(e.data==="stop"){clearInterval(i);close()}}'],{type:'text/javascript'}));
+    tw=new Worker(u);URL.revokeObjectURL(u);tw.onmessage=()=>tick();
+    tw.onerror=()=>{try{tw.terminate()}catch(e){}tw=null;clearInterval(iv);iv=setInterval(tick,250)};return}catch(e){tw=null}
+  iv=setInterval(tick,250)}
+function stopTicker(){if(tw){try{tw.postMessage('stop');tw.terminate()}catch(e){}tw=null}clearInterval(iv)}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){if(run)tick();restoreTitle()}});
 const fm=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
 function saveTimer(){try{localStorage.setItem('intizomTimer',JSON.stringify({run:!!run,end:end,left:left,tm:tm,mini:!!(pipWin&&!pipWin.closed)||!!($('miniPom')&&$('miniPom').style.display!=='none')}))}catch(e){}}
 function loadTimer(){
+  applyTS();
   try{
     const j=JSON.parse(localStorage.getItem('intizomTimer')||'null');if(!j)return;
     if(j.tm&&MD[j.tm])tm=j.tm;
     if(j.run&&j.end){
       const rem=Math.max(0,Math.round((j.end-Date.now())/1000));
       if(rem>0){left=rem;end=j.end;run=1;startTimerLoop();if(j.mini)setTimeout(openMiniPom,300)}
-      else{left=0;run=0;end=0;/* completed while away */setTimeout(()=>{if(j.tm==='pom'){win();S.focus=(S.focus||0)+25;S.pts=(S.pts||0)+5;save();setM('sb')}else{beep();setM('pom')};notifyTimer('Timer finished · session complete')},400)}
+      else{left=0;run=0;end=0;/* completed while away */setTimeout(()=>finishTimer(1),400)}
     }else if(j.left!=null){left=j.left}
   }catch(e){}
 }
-function startTimerLoop(){clearInterval(iv);iv=setInterval(tick,250);saveTimer();notifyTimerRunning()}
-function notifyTimer(body){
+function startTimerLoop(){startTicker();saveTimer();notifyTimerRunning()}
+function notifyTimer(body,title){
   try{if('Notification'in window&&Notification.permission==='granted'){
     if(navigator.serviceWorker&&navigator.serviceWorker.ready){
-      navigator.serviceWorker.ready.then(r=>r.showNotification('Intizom Timer',{body:body,icon:'icon-192.png',badge:'icon-192.png',tag:'intizom-timer',renotify:true}));
-    }else{new Notification('Intizom Timer',{body:body,tag:'intizom-timer'})}
+      navigator.serviceWorker.ready.then(r=>r.showNotification(title||'Intizom Timer',{body:body,icon:'icon-192.png',badge:'icon-192.png',tag:'intizom-timer',renotify:true,silent:false,requireInteraction:true,vibrate:TSET().vib?[400,150,400,150,700]:[]}));
+    }else{new Notification(title||'Intizom Timer',{body:body,tag:'intizom-timer'})}
   }}catch(e){}
 }
 function notifyTimerRunning(){
   if(!run)return;
   showLiveTimerNotif(false);
 }
-function vTimer(){return `<div class="tabs">${Object.keys(MD).map(k=>`<button class="${tm==k?'on':''}" onclick="setM('${k}')">${MD[k][0]}</button>`).join('')}</div><div class="card"><div class="ringw"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" class="rg0"/><circle id="tring" cx="60" cy="60" r="54" class="rg1" style="stroke-dashoffset:${ringOff()}"/></svg><div class="big" id="tbig">${fm(left)}</div></div><div class="g" style="margin-top:10px"><button class="p" onclick="tgl()" id="tgo">${run?'Pause':'Start'}</button><button onclick="setM(tm)">Reset</button><button onclick="openMiniPom()">Mini ▢</button></div><button style="width:100%;margin-top:8px" onclick="study(1)">🎯 Focus mode (with mind-dump notes)</button></div>${mindCard()}${selCard()}<div class="card sm">Today’s focus: <b>${S.focus}</b> min. Mini: laptopda boshqa ilova ustida (PiP), telefonda tirik bildirishnoma. Sahifa butunlay yopilsa timer to‘xtaydi.</div>`}
+function tsLine(){const t=TSET(),n=(S.pc||0)%t.ev;return `🍅 ${n}/${t.ev} · Auto: ☕${t.ab?'✓':'✗'} 🍅${t.ap?'✓':'✗'}`}
+function vTimer(){applyTS();return `<div class="tabs">${Object.keys(MD).map(k=>`<button class="${tm==k?'on':''}" onclick="setM('${k}')">${MD[k][0]}</button>`).join('')}</div><div class="card"><div class="row" style="margin-bottom:4px"><span class="sm sp" id="tsl">${tsLine()}</span><button onclick="openTS()" aria-label="Timer sozlamalari">⚙️ Sozlamalar</button></div><div class="ringw"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" class="rg0"/><circle id="tring" cx="60" cy="60" r="54" class="rg1" style="stroke-dashoffset:${ringOff()}"/></svg><div class="big" id="tbig">${fm(left)}</div></div><div class="g" style="margin-top:10px"><button class="p" onclick="tgl()" id="tgo">${run?'Pause':'Start'}</button><button onclick="setM(tm)">Reset</button><button onclick="openMiniPom()">Mini ▢</button></div><button style="width:100%;margin-top:8px" onclick="study(1)">🎯 Focus mode (with mind-dump notes)</button></div>${mindCard()}${selCard()}<div class="card sm">Today’s focus: <b>${S.focus}</b> min. Mini: laptopda boshqa ilova ustida (PiP), telefonda tirik bildirishnoma. Tugaganda ovoz + vibratsiya + bildirishnoma beradi. Sahifa butunlay yopilsa timer to‘xtaydi.</div>`}
 function ringOff(){const tot=(MD[tm]?MD[tm][1]:25)*60;return 339.3*(left/Math.max(1,tot))}
 function mindCard(){return`<div class="card"><b>💭 What’s on your mind?</b><div class="sm" style="margin:2px 0 8px">Timer ishlayotganda chalg‘itgan fikrni shu yerga tashlab qo‘ying — vaqtingiz to‘xtamaydi.</div><div class="row"><input id="mindT" class="sp" placeholder="Fikr, g‘oya, eslatma…" onkeydown="if(event.key==='Enter')saveMindT()"><button class="p" onclick="saveMindT()">Save</button></div><div id="mindL">${mindList()}</div></div>`}
 function mindList(){const n=(S.notes||[]).slice(0,3);return n.length?n.map(x=>`<div class="sm" style="margin-top:6px;padding:8px 10px;border-radius:10px;background:var(--b)">${E(x.t)}</div>`).join('')+`<div class="sm" style="margin-top:6px;opacity:.7">Jami ${S.notes.length} ta fikr (Settings → Fikrlar)</div>`:''}
@@ -1435,10 +1460,11 @@ function saveMindT(){const el=$('mindT');if(!el)return;const v=el.value.trim();i
 function selItem(){if(!sel)return null;const a=sel.split(':');return (a[0]=='t'?S.tasks:S.habits).find(x=>x.id==a[1])||null}
 function selCard(){const T=ds(),ts=S.tasks.filter(t=>!t.done&&t.date<=T),it=selItem();
 return `<div class="card"><select onchange="sel=this.value;draw()"><option value="">Choose a task or habit…</option>${ts.length?'<optgroup label="Tasks">'+ts.map(t=>`<option value="t:${t.id}" ${sel=='t:'+t.id?'selected':''}>${E(t.t)}</option>`).join('')+'</optgroup>':''}${S.habits.length?'<optgroup label="Habits">'+S.habits.map(h=>`<option value="h:${h.id}" ${sel=='h:'+h.id?'selected':''}>${E(h.t)}</option>`).join('')+'</optgroup>':''}</select>${it?`<div class="sm" style="margin-top:6px">🍅 Total for this item: <b>${it.fm||0}</b> min</div>`:''}</div>`}
-function setM(k){tm=k;left=MD[k][1]*60;run=0;end=0;clearInterval(iv);saveTimer();draw();updMini()}
+function setM(k){applyTS();tm=k;left=MD[k][1]*60;run=0;end=0;stopTicker();lastTickSec=-1;saveTimer();draw();updMini()}
 let pf=0;
-function tgl(){if(run){run=0;clearInterval(iv);left=Math.max(0,Math.round((end-Date.now())/1000));end=0;saveTimer();upd();updMini();releaseWake();updateMediaSession()}else{if(tm=='pom'&&left==1500&&!pf){pf=1;preflight(()=>{pf=0;gox()},()=>{pf=0});return}gox()}}
-function gox(){run=1;end=Date.now()+left*1000;startTimerLoop();upd();openMiniPom();requestWake();updateMediaSession()}
+function tgl(skipPre){if(run){run=0;stopTicker();left=Math.max(0,Math.round((end-Date.now())/1000));end=0;saveTimer();upd();updMini();releaseWake();updateMediaSession();clearLiveTimerNotif()}else{unlockAudio();if(tm=='pom'&&left==MD.pom[1]*60&&!pf&&!skipPre){pf=1;preflight(()=>{pf=0;gox()},()=>{pf=0});return}gox()}}
+function gox(auto){run=1;end=Date.now()+left*1000;lastTickSec=-1;startTimerLoop();upd();if(!auto)openMiniPom();else updMini();requestWake();updateMediaSession();
+  if(!auto&&pipSupported()&&'Notification'in window&&Notification.permission==='default'){try{Notification.requestPermission()}catch(e){}}}
 let AC;const ac=()=>AC||(AC=new (window.AudioContext||window.webkitAudioContext)());
 function clk(f){try{const a=ac(),o=a.createOscillator(),g=a.createGain();o.type='square';o.frequency.value=f;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.08,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.09);o.start();o.stop(a.currentTime+.1)}catch(e){}}
 const SWT=['Phone silenced','Water and space ready','Goal is clear','Distractions removed'];
@@ -1458,7 +1484,7 @@ k.onpointermove=e=>{if(!drag)return;set(p0+(y0-e.clientY)/rng());const d=Math.fl
 const up=()=>{if(!drag)return;drag=0;t.classList.remove('drag');if(p>=.88){set(1);on(i)}else set(0)};
 k.onpointerup=up;k.onpointercancel=up;
 k.onkeydown=e=>{if(e.key=='Enter'||e.key==' '||e.key=='ArrowUp'){e.preventDefault();set(1);on(i)}}})}
-function win(){const w=$('win');w.style.display='flex';let h='';for(let i=0;i<44;i++){const a=Math.random()*6.28,d=90+Math.random()*190;h+=`<span style="--x:${Math.cos(a)*d}px;--y:${Math.sin(a)*d}px;animation-delay:${Math.random()*.4}s">${['✨','⭐','🎉','🍅','💫'][i%5]}</span>`}$('wp').innerHTML=h;chime();navigator.vibrate&&navigator.vibrate([80,60,80,60,200])}
+function win(){const w=$('win');w.style.display='flex';let h='';for(let i=0;i<44;i++){const a=Math.random()*6.28,d=90+Math.random()*190;h+=`<span style="--x:${Math.cos(a)*d}px;--y:${Math.sin(a)*d}px;animation-delay:${Math.random()*.4}s">${['✨','⭐','🎉','🍅','💫'][i%5]}</span>`}$('wp').innerHTML=h}
 function chime(){try{const a=ac();[523.25,659.25,783.99,1046.5,1318.5].forEach((f,i)=>{const o=a.createOscillator(),g=a.createGain(),t=a.currentTime+i*.14;o.type='sine';o.frequency.value=f;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+.9);o.start(t);o.stop(t+1)})}catch(e){}}
 const QT=[['We are what we repeatedly do. Excellence, then, is not an act, but a habit.', 'Will Durant'], ['You do not rise to the level of your goals. You fall to the level of your systems.', 'James Clear'], ['Every action you take is a vote for the type of person you wish to become.', 'James Clear'], ['The most beloved deeds are the most consistent ones, even if they are small.', 'Hadith (Bukhari & Muslim)'], ['A journey of a thousand miles begins with a single step.', 'Lao Tzu'], ['No man is free who is not master of himself.', 'Epictetus'], ['We suffer more often in imagination than in reality.', 'Seneca'], ['It is not that we have a short time to live, but that we waste much of it.', 'Seneca'], ['Waste no more time arguing about what a good man should be. Be one.', 'Marcus Aurelius'], ['He who has a why to live can bear almost any how.', 'Friedrich Nietzsche'], ['Small deeds done are better than great deeds planned.', 'Peter Marshall'], ['What you do every day matters more than what you do once in a while.', 'Gretchen Rubin'], ["If you can't do great things, do small things in a great way.", 'Napoleon Hill'], ['Success is the sum of small efforts, repeated day in and day out.', 'Robert Collier'], ['Courage is resistance to fear, mastery of fear, not absence of fear.', 'Mark Twain'], ['Do what you can, with what you have, where you are.', 'Theodore Roosevelt'], ["Don't wish it were easier. Wish you were better.", 'Jim Rohn'], ['Fall seven times, stand up eight.', 'Japanese proverb'], ['The man who moves a mountain begins by carrying away small stones.', 'Chinese proverb'], ['Tomorrow is the busiest day of the week.', 'Proverb'], ['Discipline is choosing between what you want now and what you want most.', ''], ['Motivation gets you started. Habit keeps you going.', ''], ['You will not always feel motivated, so learn to be disciplined.', ''], ['Do it tired. Do it scared. Do it bored. Just do it.', ''], ['Progress, not perfection.', ''], ['Get one percent better every day and you will be thirty-seven times better in a year.', ''], ['Missing once is an accident. Missing twice is the start of a new habit.', ''], ['Comfort is a slow loss. Growth lives just past it.', ''], ['Action is the antidote to anxiety. Take one small step now.', ''], ['Your future self is watching through your memories. Make them proud.', ''], ['Be patient with yourself. Nothing in nature blooms all year.', ''], ['A rough plan carried out beats a perfect plan never started.', ''], ['When the plan breaks, do not quit. Switch to plan B and keep moving.', ''], ['Between stimulus and response there is a space. In that space is your power to choose.', ''], ['The secret of getting ahead is getting started.', ''], ['Feelings change by the hour. A decision made calmly can carry you through them.', ''], ['What feels hard today becomes ordinary in a month.', ''], ['Keep the promises you make to yourself. That is where self-trust begins.', ''], ["You don't need a new day to begin. You only need the next five minutes.", ''], ['The pain of discipline weighs ounces. The pain of regret weighs tons.', ''], ['Rest if you must, but do not quit.', ''], ['Consistency beats intensity when intensity cannot last.', ''], ["Show up on the days you don't feel like it. Those days build you.", ''],['Sword in hand and faith in heart — that is how mountains move.', 'Khalid ibn al-Walid'],['I will either find a way or make one.', 'Attributed to Khalid ibn al-Walid'],['Be like a solid mountain — no storm can shake you.', 'Amir Temur'],['Strength is in justice, and justice is in strength.', 'Amir Temur'],['The rose and the thorn, and sorrow and gladness are linked together.', 'Omar Khayyam'],['Be happy for this moment. This moment is your life.', 'Omar Khayyam'],["You don't know me, son. You don't know what I'm capable of.", 'David Goggins'],['Stay hard.', 'David Goggins'],["Who's gonna carry the boats?", 'David Goggins'],['The only way is through.', 'David Goggins'],['Discipline equals freedom.', 'Jocko Willink'],['We are what we repeatedly do.', 'Aristotle'],['Action is the foundational key to all success.', 'Pablo Picasso'],["It always seems impossible until it's done.", 'Nelson Mandela'],['Do not pray for an easy life, pray for the strength to endure a difficult one.', 'Bruce Lee']];let lq=-1;
 function pickQ(){let i;do{i=Math.floor(Math.random()*QT.length)}while(i==lq&&QT.length>1);lq=i;$('qt').textContent='\u201c'+QT[i][0]+'\u201d';$('qa').textContent=QT[i][1]?'\u2014 '+QT[i][1]:''}
@@ -1483,16 +1509,67 @@ const bubs=$('introBubs');if(bubs&&!bubs.childElementCount){for(let i=0;i<24;i++
 sharkReal(done);
 if(matchMedia('(prefers-reduced-motion:reduce)').matches)done();
 else setTimeout(done,2200)}
-function tick(){left=Math.max(0,Math.round((end-Date.now())/1000));upd();
-try{const m=$('miniPom');if(m&&m.style.display!=='none'){const t=m.querySelector('.mp-time');if(t)t.textContent=fm(left)}}catch(e){}
-if(left%15===0)saveTimer();
-if(left%30===0&&left>0)notifyTimerRunning();
-if(!left){clearInterval(iv);run=0;end=0;saveTimer();releaseWake();updateMediaSession();clearLiveTimerNotif();
-  if(tm=='pom')win();else beep();
-  if(tm=='pom'){S.focus+=25;{const it=selItem();if(it)it.fm=(it.fm||0)+25}S.pts+=5;save();setM('sb')}else setM('pom');
-  notifyTimer('Timer finished ✓');
-  updMini();
-}}
+function tick(){
+  if(!run)return;
+  left=Math.max(0,Math.round((end-Date.now())/1000));
+  if(left!==lastTickSec){lastTickSec=left;upd();updMini(1);
+    if(left%15===0){saveTimer();updateMediaSession()}
+    if(left%30===0&&left>0)notifyTimerRunning()}
+  if(!left)finishTimer();
+}
+/* Bell-like tone: a few inharmonic partials with a soft decay — much nicer than a plain beep */
+function bell(a,f,t,v,d){[[1,1],[2.76,.32],[5.4,.12]].forEach(([m,g])=>{const o=a.createOscillator(),x=a.createGain();o.type='sine';o.frequency.value=f*m;o.connect(x);x.connect(a.destination);
+  x.gain.setValueAtTime(.0001,t);x.gain.exponentialRampToValueAtTime(v*g,t+.012);x.gain.exponentialRampToValueAtTime(.0001,t+d/(m>1?m*.55:1));o.start(t);o.stop(t+d+.05)})}
+function alarmSound(kind,reps){if(!TSET().snd)return;
+  try{const a=ac();if(a.state==='suspended')a.resume();const t0=a.currentTime+.05,seq=kind==='pom'?[523.25,659.25,783.99,1046.5]:[783.99,659.25,523.25];
+    for(let r=0;r<(reps||3);r++)seq.forEach((f,i)=>bell(a,f,t0+r*2.3+i*.24,.2,1.7))}catch(e){}}
+function alarmVibe(){if(TSET().vib&&navigator.vibrate){try{navigator.vibrate([400,150,400,150,400,150,700])}catch(e){}}}
+function unlockAudio(){try{const a=ac();if(a.state==='suspended')a.resume()}catch(e){}}
+['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,unlockAudio,{passive:true}));
+let _title0=null,_titleT=0;
+function restoreTitle(){if(_title0!==null){document.title=_title0;_title0=null}clearInterval(_titleT)}
+function flashMini(msg){
+  miniMsg=msg;miniMsgUntil=Date.now()+10000;
+  try{if(pipWin&&!pipWin.closed){const d=pipWin.document;d.body.classList.add('done');setTimeout(()=>{try{d.body.classList.remove('done')}catch(e){}},10000)}}catch(e){}
+  const el=$('miniPom');if(el){el.classList.add('mp-done');setTimeout(()=>el.classList.remove('mp-done'),10000)}
+  if(document.hidden){restoreTitle();_title0=document.title;let k=0;_titleT=setInterval(()=>{document.title=(k++%2?'':'⏰ ')+msg},900);setTimeout(restoreTitle,30000)}
+  updMini(1)}
+function alarm(kind,reps){
+  const msg=kind==='pom'?'Pomodoro tugadi 🎉':'Tanaffus tugadi — qaytamiz 💪';
+  alarmSound(kind,reps);alarmVibe();flashMini(msg);if(kind==='pom')win()}
+/* Called when the countdown reaches 0. late=1 → it finished while the page was closed (no auto-start then) */
+function finishTimer(late){
+  stopTicker();run=0;end=0;releaseWake();clearLiveTimerNotif();
+  const was=tm,t=TSET(),mins=MD.pom[1];
+  if(was==='pom'){S.focus=(S.focus||0)+mins;const it=selItem();if(it)it.fm=(it.fm||0)+mins;S.pts=(S.pts||0)+5;S.pc=(S.pc||0)+1;save()}
+  const nx=was==='pom'?((S.pc||0)%t.ev===0?'lb':'sb'):'pom',auto=!late&&(was==='pom'?t.ab:t.ap);
+  setM(nx);
+  if(was==='pom'){const w1=$('winTxt'),w2=$('winSub');if(w1)w1.textContent=mins+' min of focus · +5 points';if(w2)w2.textContent=(nx==='lb'?'Long':'Short')+' break: '+MD[nx][1]+' min. You did it!'+(auto?' (starts automatically)':'')}
+  alarm(was,auto?1:3);
+  if(auto)setTimeout(()=>{const w=$('win');if(w)w.style.display='none'},3500);
+  notifyTimer(was==='pom'?'Pomodoro tugadi — tanaffus vaqti ('+MD[nx][1]+' min)':'Tanaffus tugadi — yangi pomodoroga qaytamiz',was==='pom'?'🍅 Pomodoro tugadi':'⏰ Tanaffus tugadi');
+  if(auto)setTimeout(()=>{if(!run&&tm===nx)gox(1)},2500);
+}
+/* ---- timer settings dialog ---- */
+function tsHtml(){const t=TSET(),perm=('Notification'in window)?Notification.permission:'yo‘q';
+  const sw=(k,l,s)=>`<div class="tsr row"><div class="sp"><b>${l}</b><div class="sm">${s}</div></div><button class="${t[k]?'p':''}" onclick="tsT('${k}')" style="min-width:92px">${t[k]?'Yoqilgan':'O‘chiq'}</button></div>`;
+  const nm=(k,l,mn,mx)=>`<div class="tsr row"><div class="sp"><b>${l}</b></div><input class="tsn" type="number" inputmode="numeric" min="${mn}" max="${mx}" value="${t[k]}" onchange="tsN('${k}',this.value,${mn},${mx})"><span class="sm">min</span></div>`;
+  return `<h2>⚙️ Timer sozlamalari</h2>
+  ${sw('ab','Tanaffusni avto boshlash','Pomodoro tugagach tanaffus o‘zi boshlanadi')}
+  ${sw('ap','Pomodoroni avto boshlash','Tanaffus tugagach yangi pomodoro o‘zi boshlanadi')}
+  ${nm('pom','Pomodoro',1,180)}${nm('sb','Short break',1,60)}${nm('lb','Long break',1,120)}
+  <div class="tsr row"><div class="sp"><b>Long break har</b><div class="sm">nechta pomodorodan keyin</div></div><input class="tsn" type="number" inputmode="numeric" min="2" max="12" value="${t.ev}" onchange="tsN('ev',this.value,2,12)"><span class="sm">ta</span></div>
+  ${sw('snd','🔔 Ovoz','Tugaganda yoqimli qo‘ng‘iroq')}
+  ${sw('vib','📳 Vibratsiya','Telefonda tugaganda titraydi')}
+  <div class="tsr row"><div class="sp"><b>Bildirishnoma</b><div class="sm">Ruxsat: ${perm==='granted'?'berilgan ✓':perm==='denied'?'bloklangan (brauzer sozlamasidan yoqing)':perm}</div></div>${perm==='default'?'<button class="p" onclick="tsPerm()">Ruxsat berish</button>':''}</div>
+  <div class="g" style="margin-top:14px"><button onclick="unlockAudio();alarmSound('pom',1);alarmVibe()">▶ Sinab ko‘rish</button><button class="p" onclick="$('tsModal').remove()">Tayyor</button></div>`}
+function openTS(){const o=$('tsModal');if(o)o.remove();const d=document.createElement('div');d.id='tsModal';d.className='modal-bg';d.onclick=e=>{if(e.target===d)d.remove()};d.innerHTML='<div class="modal" id="tsBody">'+tsHtml()+'</div>';document.body.appendChild(d)}
+function tsRef(){const b=$('tsBody');if(b)b.innerHTML=tsHtml();if(tab==='timer'){const l=$('tsl');if(l)l.textContent=tsLine()}}
+function tsT(k){const t=TSET();t[k]=t[k]?0:1;save();tsRef()}
+function tsN(k,v,mn,mx){const t=TSET();v=Math.round(+v);if(!(v>=mn))v=mn;if(v>mx)v=mx;t[k]=v;save();applyTS();
+  if(!run&&(k==='pom'||k==='sb'||k==='lb')){left=MD[tm][1]*60;saveTimer();upd();updMini();if(tab==='timer')draw()}
+  tsRef()}
+function tsPerm(){try{Notification.requestPermission().then(()=>tsRef())}catch(e){}}
 function upd(){['tbig','sbig'].forEach(i=>{if($(i))$(i).textContent=fm(left)});if($('tring'))$('tring').style.strokeDashoffset=ringOff();if($('tgo'))$('tgo').textContent=run?'Pause':'Start';$('sgo').textContent=run?'Pause':'Resume';}
 function study(on){const si=selItem();$('sname').textContent=si?'🎯 '+si.t:'Focus mode';$('study').style.display=on?'flex':'none';if(on&&!run&&left==MD[tm][1]*60)tgl();upd();if('Notification'in window&&Notification.permission=='default')Notification.requestPermission()}
 function saveMind(){const v=$('mind').value.trim();if(!v)return;S.notes.unshift({id:uid(),t:v,d:new Date().toLocaleString()});$('mind').value='';save();toast('Note saved')}
@@ -1513,7 +1590,7 @@ function showMoreSheet(){
   if(!el){el=document.createElement('div');el.id='moreSheet';document.body.appendChild(el)}
   clearTimeout(closeMoreSheet.t);el.classList.remove('out');el.style.display='flex';
   const L=heroLevel(),c=rkCol(L.d),th=evoTh();
-  const it=[['hero','🛡️','Hero','Level, stat, rank'],['vocab','📚','Vocab','Flashcards'],['shadow','🎧','Shadow','Shadowing'],['fin','💰','Moliya','Finance'],['settings','⚙️','Settings','Sozlamalar']];
+  const it=[['hero','🛡️','Hero','Level, stat, rank'],['vocab','📚','Vocab','Flashcards'],['shadow','🎧','Shadow','Shadowing'],['fin','💰','Moliya','Finance'],['ach','🏆','Achievements','Yutuqlar'],['wl','✨','Wishlist','Istaklar'],['settings','⚙️','Settings','Sozlamalar']];
   el.innerHTML=`<div class="more-backdrop" onclick="closeMoreSheet()"></div>
   <aside class="sb" role="dialog" aria-label="Menyu">
     <div class="sb-top">${badgeSVG(L.d,40)}<div style="min-width:0"><b style="color:${c}">${rkName(L.d)}</b><small>Level ${L.lv} · 🪙 ${S.coins}</small></div><button class="sb-x" onclick="closeMoreSheet()" aria-label="Yopish">✕</button></div>
@@ -1556,6 +1633,16 @@ function vMore(){
         <span>Moliya</span>
         <span class="sm">Finance</span>
       </button>
+      <button type="button" class="more-tile" onclick="go('ach')">
+        <span class="more-ico">🏆</span>
+        <span>Achievements</span>
+        <span class="sm">Yutuqlar</span>
+      </button>
+      <button type="button" class="more-tile" onclick="go('wl')">
+        <span class="more-ico">✨</span>
+        <span>Wishlist</span>
+        <span class="sm">Istaklar</span>
+      </button>
       <button type="button" class="more-tile" onclick="go('settings')">
         <span class="more-ico">⚙️</span>
         <span>Settings</span>
@@ -1577,7 +1664,7 @@ function vSettings(){
 <div class="card"><b>Fikrlar / Mind notes</b>
 <div class="row" style="margin:8px 0;gap:8px"><input id="mindSet" placeholder="Yangi fikr yozing…" style="flex:1"><button class="p" onclick="addNoteFromSettings()">Saqlash</button></div>
 ${S.notes.map(n=>`<div class="row" style="margin-top:6px"><div class="sp">${E(n.t)}<div class="sm">${E(n.d)}</div></div><button onclick="S.notes=S.notes.filter(x=>x.id!='${n.id}');save();draw()">✕</button></div>`).join('')||'<div class="sm">Hali fikr yo‘q. Yuqoridan yozing yoki focus rejimida yozing.</div>'}</div>
-${acc()}${bkCard()}${tools()}${shop()}<div class="card"><b>Statistics</b><div class="g sm" style="margin-top:6px"><span>Tasks done: <b>${wt}</b></span><span>Habits (7 days): <b>${wk}</b></span><span>Focus: <b>${S.focus} min</b></span><span>Points: <b>${S.pts}</b></span><span>Soul: <b>${S.hp}/50</b></span><span>Coins: <b>${S.coins}</b></span></div>
+${punCard()}${acc()}${bkCard()}${tools()}${shop()}<div class="card"><b>Statistics</b><div class="g sm" style="margin-top:6px"><span>Tasks done: <b>${wt}</b></span><span>Habits (7 days): <b>${wk}</b></span><span>Focus: <b>${S.focus} min</b></span><span>Points: <b>${S.pts}</b></span><span>Soul: <b>${S.hp}/50</b></span><span>Coins: <b>${S.coins}</b></span></div>
 <div class="sm" style="margin-top:10px;line-height:1.5"><b>Ball qanday beriladi?</b><br>
 • Task: muhimlikka qarab 8–17 ball<br>
 • Habit: qiyinlikka qarab 3–15 ball (+30 kun streak = +200)<br>
@@ -1648,7 +1735,7 @@ function setTheme(t){
 }
 /* ===== v4 additions ===== */
 const tm2=m=>pad(m/60|0)+':'+pad(m%60),pmn=v=>v?+v.slice(0,2)*60+ +v.slice(3,5):null,shd=(d,n)=>{const x=pd(d);x.setDate(x.getDate()+n);return ds(x)},cap=s=>s[0].toUpperCase()+s.slice(1);
-let cd=ds(),mo=0,te=null,CI={},vc='all',vk=null,planView='day',vq=[],vf=0,vr=false;
+let cd=ds(),mo=0,te=null,CI={},vc='all',vk=null,planView='day',vq=[],vf=0,vr=false,vp=-1,vi=0;
 const VC=['all','speaking','reading','listening'];function getVB(){return Math.max(5,Math.min(500,+(S.vb||50)))}
 /* tabs reduced to 5: vocab+shadow moved into More + side fabs */
 S.tasks.forEach(t=>{t.type=t.type||'task';if(t.st==null&&t.hour!=null&&!t.allday){t.st=t.hour*60;t.en=Math.min(1439,t.st+60)}});
@@ -1871,7 +1958,8 @@ if(doSoul){const ex=(S.pen||[]).filter(p=>!p.d&&p.src===src&&p.sid===sid&&p.day=
 if(add<=0)return;
 for(let i=0;i<add;i++){
   if(doSoul){S.hp=Math.max(0,S.hp-soulAmt)}
-  const t=PEN[Math.floor(Math.random()*PEN.length)],v=/vocab/i.test(t);
+  const pool=punPool();if(!pool.length)continue; /* user emptied the list → no penalty task */
+  const t=pool[Math.floor(Math.random()*pool.length)].t,v=/vocab/i.test(t);
   S.pen.push({id:uid(),t,f:n,d:0,v:v?1:0,src,sid,day,at:Date.now(),soul:soulAmt,soulHit:doSoul?1:0});
   if(v)S.vx=(S.vx||0)+50;
 }
@@ -2021,36 +2109,50 @@ function shStart(){
 /* vocab */
 function vday(){const T=ds();if(!S.vy)S.vy={d:T,n:0};else if(S.vy.d!=T){S.vx=Math.max(0,(S.vx||0)-Math.max(0,S.vy.n-getVB()));S.vy={d:T,n:0}}return S.vy}
 function vhead(){const y=vday(),t=getVB()+(S.vx||0),l=Math.max(0,t-y.n);return `<div class="card"><div class="row"><b class="sp">Today’s vocab target: ${y.n} / ${t}</b>${S.vx?`<span class="tag" style="color:var(--r)">+${S.vx} penalty</span>`:''}</div><div class="bar" style="margin-top:8px;height:8px"><i style="width:${Math.min(100,y.n/t*100)}%;background:var(--a)"></i></div><div class="sm" style="margin-top:6px">${l?l+' words left today':'Target reached 🎉'}</div></div>`}
-function vVocab(){if(vk)return vStudy();S.vd=S.vd||[];const L=S.vd.filter(d=>vc=='all'||d.c==vc);
-return `<div class="row" style="margin-bottom:10px"><button onclick="go('more')">← More</button><b class="sp" style="text-align:center">Vocab</b><span style="width:52px"></span></div>`+vhead()+`<div class="tabs">${VC.map(c=>`<button class="${c==vc?'on':''}" onclick="vc='${c}';draw()">${c=='all'?'All':cap(c)}</button>`).join('')}</div>`+(L.map(d=>`<div class="card row"><div class="sp"><b>${E(d.n)}</b><div class="sm">${cap(d.c)} · ${d.w.filter(x=>x[2]).length}/${d.w.length} learned</div></div><button class="p" onclick="vOpen('${d.id}')">Study</button><button onclick="vHtml('${d.id}')" title="Download HTML">⬇</button><button onclick="vDel('${d.id}')">✕</button></div>`).join('')||'<p class="sm">No word sets yet. Create one below.</p>')+`<h2>New word set</h2><div class="card"><input id="vn" placeholder="Set name (e.g. Podcast 1)"><select id="vcat" style="margin:8px 0"><option value="speaking">Speaking</option><option value="reading">Reading</option><option value="listening">Listening</option></select><textarea id="vt" rows="8" placeholder="Har qatorga bitta:&#10;word - tarjima&#10;yoki faqat inglizcha so‘z&#10;&#10;Masalan:&#10;procrastinate&#10;take off - havoga ko‘tarilmoq"></textarea><div class="g" style="margin-top:8px"><button class="p" onclick="vMake()">Create flashcards</button><button onclick="vMakeAndShare()">Create + Share to TG</button></div></div>
+function vVocab0(){if(vk)return vStudy();const dr=drGet();S.vd=S.vd||[];const L=S.vd.filter(d=>vc=='all'||d.c==vc);
+return `<div class="row" style="margin-bottom:10px"><button onclick="go('more')">← More</button><b class="sp" style="text-align:center">Vocab</b><span style="width:52px"></span></div>`+vhead()+`<div class="tabs">${VC.map(c=>`<button class="${c==vc?'on':''}" onclick="vc='${c}';draw()">${c=='all'?'All':cap(c)}</button>`).join('')}</div>`+(L.map(d=>`<div class="card row"><div class="sp"><b>${E(d.n)}</b><div class="sm">${cap(d.c)} · ${d.w.filter(x=>x[2]).length}/${d.w.length} learned${d.parts?' · '+d.parts.length+' qism':''}</div></div><button class="p" onclick="vOpen('${d.id}')">Study</button><button onclick="vHtml('${d.id}')" title="Download HTML">⬇</button><button onclick="vDel('${d.id}')">✕</button></div>`).join('')||'<p class="sm">No word sets yet. Create one below.</p>')+`<h2>New word set</h2><div class="card"><input id="vn" data-dr="vn" value="${E(dr.vn||'')}" placeholder="Set name (e.g. Podcast 1)"><select id="vcat" data-dr="vcat" style="margin:8px 0">${['speaking','reading','listening'].map(c=>`<option value="${c}" ${dr.vcat===c?'selected':''}>${cap(c)}</option>`).join('')}</select><textarea id="vt" data-dr="vt" rows="8" placeholder="Har qatorga bitta:&#10;word - tarjima&#10;yoki faqat inglizcha so‘z&#10;&#10;Qismlarga bo‘lish: qismlar orasiga bo‘sh qator qo‘ying&#10;(yoki  # 1-qism  deb sarlavha yozing)&#10;&#10;procrastinate&#10;take off - havoga ko‘tarilmoq&#10;&#10;word three&#10;word four">
+${E(dr.vt||'')}</textarea><div class="sm" style="margin-top:6px">💡 Bo‘sh qator = yangi qism. Kartalar sizning tartibingizda, qism-qism o‘rganiladi.</div><div class="g" style="margin-top:8px"><button class="p" onclick="vMake()">Create flashcards</button><button onclick="vMakeAndShare()">Create + Share to TG</button></div></div>
 <h2>📝 My notes</h2>
-<div class="card" style="padding:0;overflow:hidden">
-<div id="vNotesChat" style="max-height:280px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px">${(S.vnotes||[]).map(n=>`<div style="align-self:${n.me?'flex-end':'flex-start'};max-width:85%;background:${n.me?'color-mix(in srgb,var(--a) 22%,var(--c))':'var(--b)'};padding:8px 12px;border-radius:14px;border-bottom-${n.me?'right':'left'}-radius:4px"><div style="font-size:14px;white-space:pre-wrap">${E(n.t)}</div><div class="sm" style="margin-top:4px;opacity:.7;font-size:11px">${n.at?new Date(n.at).toLocaleString():''}</div></div>`).join('')||'<div class="sm" style="text-align:center;padding:20px">Notes empty — write below</div>'}</div>
-<div class="row" style="padding:10px;border-top:1px solid var(--b);gap:8px"><input id="vNoteIn" placeholder="Note yozing…" style="flex:1" onkeydown="if(event.key==='Enter'){addVNote();event.preventDefault()}"><button class="p" onclick="addVNote()">Send</button></div>
+<div class="card" id="vNotesBox" style="padding:0;overflow:hidden">
+<div id="vNotesChat" style="max-height:280px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px">${(S.vnotes||[]).map((n,i)=>`<div style="align-self:${n.me?'flex-end':'flex-start'};max-width:85%;background:${n.me?'color-mix(in srgb,var(--a) 22%,var(--c))':'var(--b)'};padding:8px 12px;border-radius:14px;border-bottom-${n.me?'right':'left'}-radius:4px">${n.t?`<div style="font-size:14px;white-space:pre-wrap;word-break:break-word">${E(n.t)}</div>`:''}${vFilesHtml(n)}<div class="sm" style="margin-top:4px;opacity:.7;font-size:11px;display:flex;gap:8px;align-items:center;justify-content:space-between"><span>${n.at?new Date(n.at).toLocaleString():''}</span><button class="nf-x" onclick="vNoteDel(${i})" aria-label="O‘chirish">✕</button></div></div>`).join('')||'<div class="sm" style="text-align:center;padding:20px">Notes empty — write or attach a file below</div>'}</div>
+${vStage.length?`<div class="stg">${vStage.map(f=>`<span>📎 ${E(f.name)} <small class="sm">${fsz(f.size)}</small><button onclick="vStageRm('${f.id}')" aria-label="Olib tashlash">✕</button></span>`).join('')}</div>`:''}
+<div class="row" style="padding:10px;border-top:1px solid var(--b);gap:8px"><button onclick="$('vNoteFile').click()" title="Fayl biriktirish" aria-label="Fayl biriktirish">📎</button><input id="vNoteIn" data-dr="vnote" value="${E(dr.vnote||'')}" placeholder="Note yozing yoki fayl biriktiring…" style="flex:1" onkeydown="if(event.key==='Enter'){addVNote();event.preventDefault()}"><button class="p" onclick="addVNote()">Send</button><input id="vNoteFile" type="file" multiple hidden onchange="vNoteAttach(this)"></div>
 </div>`}
-function addVNote(){const v=($('vNoteIn')||{}).value;if(!v||!v.trim())return;S.vnotes=S.vnotes||[];S.vnotes.push({t:v.trim(),me:1,at:Date.now()});if(S.vnotes.length>200)S.vnotes=S.vnotes.slice(-200);$('vNoteIn').value='';save();draw();setTimeout(()=>{const c=$('vNotesChat');if(c)c.scrollTop=c.scrollHeight},50)}
+function vVocab(){const h=vVocab0();setTimeout(vHydrate,0);return h}
+function addVNote(){const el=$('vNoteIn'),v=(el&&el.value||'').trim();if(!v&&!vStage.length)return;S.vnotes=S.vnotes||[];
+  S.vnotes.push(Object.assign({t:v,me:1,at:Date.now()},vStage.length?{files:vStage.slice()}:{}));
+  if(S.vnotes.length>200){S.vnotes.slice(0,S.vnotes.length-200).forEach(n=>vFilesGC(n));S.vnotes=S.vnotes.slice(-200)}
+  vStage=[];drSet('vfiles',[]);drSet('vnote','');if(el)el.value='';save();draw();setTimeout(()=>{const c=$('vNotesChat');if(c)c.scrollTop=c.scrollHeight},50)}
 function vMakeAndShare(){vMake();const last=S.vd[S.vd.length-1];if(last){vHtml(last.id);shareFlashHtml(last)}}
 
 function vMake(){
   const raw=$('vt').value.split(/\n/);
-  const pending=[]; let bad=0;
+  const pending=[]; let bad=0, part=0, has=false; const names={};
   raw.forEach(l=>{
-    l=l.trim().replace(/^\d+[.)]\s+/,'');
+    l=l.trim();
+    if(!l){ if(has){part++;has=false} return }
+    const h=l.match(/^#{1,3}\s*(.+)$/);
+    if(h){ if(has){part++;has=false} names[part]=h[1].trim(); return }
+    l=l.replace(/^\d+[.)]\s+/,'');
     if(!l)return;
     const m=l.match(/\t| [-–—] |\s*[=|]\s*/)||l.match(/\s*:\s*/);
     if(m){
       const a=l.slice(0,m.index).trim(), b=l.slice(m.index+m[0].length).trim();
-      if(a&&b) pending.push([a,b,0]); else bad++;
+      if(a&&b){ pending.push([a,b,0,part]); has=true } else bad++;
     } else if(/^[a-zA-Z][a-zA-Z\s\-']{0,40}$/.test(l)){
-      pending.push([l,null,0]);
+      pending.push([l,null,0,part]); has=true;
     } else bad++;
   });
+  /* renumber parts 0..n-1 in the order the user wrote them */
+  const used=[...new Set(pending.map(x=>x[3]))];
+  const parts=used.length>1?used.map((u,i)=>names[u]||((i+1)+'-qism')):null;
+  pending.forEach(x=>{x[3]=used.indexOf(x[3])});
   if(!pending.length) return toast('Yozing: word - tarjima  yoki  faqat inglizcha so‘z');
   const n = $('vn').value.trim() || prompt('To‘plam nomi:') || ('Set ' + ((S.vd||[]).length+1));
   const needDict = pending.filter(x=>x[1]==null);
   if(!needDict.length){
-    (S.vd=S.vd||[]).push({id:uid(),n,c:$('vcat').value,w:pending});
-    save(); toast(pending.length+' cards yaratildi'+(bad?' · '+bad+' o‘tkazib yuborildi':'')); draw(); return;
+    (S.vd=S.vd||[]).push(Object.assign({id:uid(),n,c:$('vcat').value,w:pending},parts?{parts}:{}));
+    drSet('vn','');drSet('vt','');save(); toast(pending.length+' cards yaratildi'+(bad?' · '+bad+' o‘tkazib yuborildi':'')); draw(); return;
   }
   toast(needDict.length+' so‘z yuklanmoqda…');
   (async()=>{
@@ -2070,54 +2172,66 @@ function vMake(){
         });
         const tr = defs.slice(0,2).join(' · ') || '—';
         const full = phon ? (phon + ' · ' + tr) : tr;
-        w.push([word, full, 0]);
+        w.push([word, full, 0, item[3]]);
       }catch(e){
-        w.push([word, '(topilmadi — tahrirlang)', 0]);
+        w.push([word, '(topilmadi — tahrirlang)', 0, item[3]]);
       }
     }
-    (S.vd=S.vd||[]).push({id:uid(),n,c:$('vcat').value,w});
-    save();
+    (S.vd=S.vd||[]).push(Object.assign({id:uid(),n,c:$('vcat').value,w},parts?{parts}:{}));
+    drSet('vn','');drSet('vt','');save();
     toast(w.length+' cards yaratildi (dict yordamida)');
     draw();
   })();
 }
-function vOpen(i){vk=S.vd.find(d=>d.id==i);vBuild(0)}
-function vBuild(sh){vq=vk.w.filter(x=>!x[2]);if(sh)vq.sort(()=>Math.random()-.5);vf=0;draw()}
+function vOpen(i){vk=S.vd.find(d=>d.id==i);vp=-1;vBuild(0)}
+const vIn=x=>vp<0||(x[3]||0)===vp;
+function vBuild(sh){vq=vk.w.filter(x=>!x[2]&&vIn(x));if(sh)vq.sort(()=>Math.random()-.5);vi=0;vf=0;draw()}
+function vPart(k){vp=k;vBuild(0)}
+function vNext(){if(!vq.length)return;vi=(vi+1)%vq.length;vf=0;draw()}
+function vPrev(){if(!vq.length)return;vi=(vi-1+vq.length)%vq.length;vf=0;draw()}
 function vSay(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';speechSynthesis.speak(u)}catch(e){}}
-function vStudy(){const tot=vk.w.length,l=vq.length,x=vq[0],en=(!!vr)==(!!vf);
-const top=`<div class="row" style="margin-bottom:8px"><button onclick="vk=null;draw()">← Back</button><b class="sp" style="text-align:center">${E(vk.n)}</b><button onclick="vr=!vr;vf=0;draw()">${vr?'UZ → EN':'EN → UZ'}</button></div>`+vhead()+`<div class="sm" style="margin:6px 0">${l} left · ${tot-l}/${tot} learned</div>`;
-if(!l)return top+`<div class="card" style="min-height:200px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:22px;cursor:pointer" onclick="vk.w.forEach(x=>x[2]=0);save();vBuild(1)">Well done! Set complete 🎉<br><span class="sm">Tap to restart</span></div>`;
+function vStudy(){const sc=vk.w.filter(vIn),tot=sc.length,l=vq.length,x=vq[vi],en=(!!vr)==(!!vf);
+const pt=vk.parts?`<div class="tabs" style="overflow-x:auto;-webkit-overflow-scrolling:touch"><button class="${vp<0?'on':''}" style="flex:0 0 auto;white-space:nowrap" onclick="vPart(-1)">Hammasi</button>${vk.parts.map((n,k)=>{const a=vk.w.filter(z=>(z[3]||0)===k);return `<button class="${vp===k?'on':''}" style="flex:0 0 auto;white-space:nowrap" onclick="vPart(${k})">${E(n)} · ${a.filter(z=>z[2]).length}/${a.length}</button>`}).join('')}</div>`:'';
+const top=`<div class="row" style="margin-bottom:8px"><button onclick="vk=null;draw()">← Back</button><b class="sp" style="text-align:center">${E(vk.n)}</b><button onclick="vr=!vr;vf=0;draw()">${vr?'UZ → EN':'EN → UZ'}</button></div>`+vhead()+pt+`<div class="sm" style="margin:6px 0">${l} left · ${tot-l}/${tot} learned</div>`;
+if(!l){const nk=(vp>=0&&vk.parts&&vp+1<vk.parts.length)?vp+1:-1;
+return top+`<div class="card" style="min-height:200px;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;text-align:center;font-size:22px;cursor:pointer" onclick="vk.w.forEach(x=>{if(vIn(x))x[2]=0});save();vBuild(0)">${vp>=0?'Qism tugadi!':'Well done! Set complete'} 🎉<br><span class="sm">Tap to restart</span>${nk>=0?`<button class="p" onclick="event.stopPropagation();vPart(${nk})">Keyingi qism: ${E(vk.parts[nk])} ▶</button>`:''}</div>`}
 if(en&&S.vs!==0)setTimeout(()=>vSay(x[0]),50);
-return top+`<div class="card" style="min-height:220px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:24px;font-weight:600;line-height:1.35;cursor:pointer;${vf?'color:var(--a)':''}" onclick="vf=!vf;draw()">${E(en?x[0]:x[1])}</div><div class="sm" style="text-align:center;margin:8px 0 12px">${vf?'Did you remember it?':'Tap the card to flip'}</div><div class="g"><button class="d" style="padding:14px;font-weight:600" onclick="vNo()">Repeat</button><button class="p" style="padding:14px" onclick="vOk()">I know</button></div><div class="g" style="margin-top:8px"><button onclick="vSay(vq[0][0])">🔊 Listen</button><button onclick="vBuild(1)">🔀 Shuffle</button></div><button class="lk" onclick="S.vs=S.vs===0?1:0;save();draw()">Auto-pronounce: ${S.vs===0?'off':'on'}</button>`}
-function vOk(){const x=vq.shift(),y=vday();x[2]=1;y.n++;S.pts+=1;if(y.n>=getVB()+(S.vx||0))S.pen.forEach(p=>{if(p.v&&!p.d)p.d=1});save();vf=0;draw()}
-function vNo(){vq.push(vq.shift());vf=0;draw()}
+return top+`<div class="card" id="vcard" style="min-height:220px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:24px;font-weight:600;line-height:1.35;cursor:pointer;touch-action:pan-y;${vf?'color:var(--a)':''}" onclick="vf=!vf;draw()">${E(en?x[0]:x[1])}</div><div class="sm" style="text-align:center;margin:8px 0 8px">${vf?'Did you remember it?':'Tap the card to flip · swipe ◀ ▶'}</div>
+<div class="row" style="margin-bottom:10px"><button onclick="vPrev()" style="flex:1;padding:12px" ${l<2?'disabled':''}>◀ Oldingi</button><span class="sm" style="min-width:64px;text-align:center"><b>${vi+1}</b> / ${l}</span><button onclick="vNext()" style="flex:1;padding:12px" ${l<2?'disabled':''}>Keyingi ▶</button></div>
+<div class="g"><button class="d" style="padding:14px;font-weight:600" onclick="vNo()">Repeat</button><button class="p" style="padding:14px" onclick="vOk()">I know</button></div><div class="g" style="margin-top:8px"><button onclick="vSay(vq[vi][0])">🔊 Listen</button><button onclick="vBuild(1)">🔀 Shuffle</button><button onclick="vBuild(0)">↧ Tartibda</button></div><button class="lk" onclick="S.vs=S.vs===0?1:0;save();draw()">Auto-pronounce: ${S.vs===0?'off':'on'}</button>`}
+function vOk(){if(!vq.length)return;const x=vq.splice(vi,1)[0],y=vday();if(vi>=vq.length)vi=0;x[2]=1;y.n++;S.pts+=1;if(y.n>=getVB()+(S.vx||0))S.pen.forEach(p=>{if(p.v&&!p.d)p.d=1});save();vf=0;draw()}
+function vNo(){vNext()}
 function vDel(i){if(confirm('Delete this word set?')){S.vd=S.vd.filter(d=>d.id!=i);save();draw()}}
 function vHtml(i,share){
 const d=S.vd.find(x=>x.id==i);if(!d)return;
-const rows=JSON.stringify(d.w.map(w=>[d.c||'Set',w[0],w[1]]));
+const rows=JSON.stringify(d.w.map(w=>[(d.parts&&d.parts[w[3]||0])||d.c||'Set',w[0],w[1]]));
 const fid=JSON.stringify(String(d.id));
 const title=(d.n||'Flashcards').replace(/[<>&"]/g,'');
-const css=':root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#0b1220;--fg:#e8eef7;--card:#121b2e;--ac:#14b8a6;--mut:#8a9bb2;--ok:#2e8b57;--no:#e5484d;--bd:#22304a}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:560px;margin:0 auto;padding:16px}h1{font-size:20px;margin:4px 0 12px}.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}select,button{font:inherit;padding:9px 12px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--fg)}select{flex:1;min-width:140px}button{cursor:pointer}.info{color:var(--mut);font-size:14px;margin:6px 0}.pb{height:6px;background:var(--bd);border-radius:3px;overflow:hidden;margin-bottom:14px}.pb i{display:block;height:100%;background:var(--ac);width:0;transition:width .3s}.card{min-height:220px;display:flex;align-items:center;justify-content:center;text-align:center;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:24px;font-size:24px;font-weight:600;cursor:pointer;line-height:1.35}.card.back{color:var(--ac)}.hint{text-align:center;color:var(--mut);font-size:13px;margin:8px 0 14px}.act{display:flex;gap:10px}.act button{flex:1;font-weight:600;padding:14px}.no{color:var(--no);border-color:var(--no)}.ok{color:var(--ok);border-color:var(--ok)}';
+const css=':root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#0b1220;--fg:#e8eef7;--card:#121b2e;--ac:#14b8a6;--mut:#8a9bb2;--ok:#2e8b57;--no:#e5484d;--bd:#22304a}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:560px;margin:0 auto;padding:16px}h1{font-size:20px;margin:4px 0 12px}.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}select,button{font:inherit;padding:9px 12px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--fg)}select{flex:1;min-width:140px}button{cursor:pointer}.info{color:var(--mut);font-size:14px;margin:6px 0}.pb{height:6px;background:var(--bd);border-radius:3px;overflow:hidden;margin-bottom:14px}.pb i{display:block;height:100%;background:var(--ac);width:0;transition:width .3s}.card{min-height:220px;display:flex;align-items:center;justify-content:center;text-align:center;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:24px;font-size:24px;font-weight:600;cursor:pointer;line-height:1.35}.card.back{color:var(--ac)}.hint{text-align:center;color:var(--mut);font-size:13px;margin:8px 0 14px}.act{display:flex;gap:10px}.act button{flex:1;font-weight:600;padding:14px}.no{color:var(--no);border-color:var(--no)}.ok{color:var(--ok);border-color:var(--ok)}.nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px}.nav button{flex:1}.nav span{color:var(--mut);font-size:14px;min-width:64px;text-align:center}';
 const js=[
 'const D='+rows+';',
-'let sec="all",rev=false,deck=[],flip=false,known=new Set();',
+'let sec="all",rev=false,deck=[],di=0,flip=false,known=new Set();',
 'const $=id=>document.getElementById(id);',
 'try{known=new Set(JSON.parse(localStorage.getItem("fc_"+'+fid+')||"[]"))}catch(e){}',
 'function save(){try{localStorage.setItem("fc_"+'+fid+',JSON.stringify([...known]))}catch(e){}}',
 'const secs=[...new Set(D.map(x=>x[0]))];',
 '$("sec").innerHTML=\'<option value="all">Barcha</option>\'+secs.map(s=>"<option>"+s+"</option>").join("");',
 'const inSec=()=>D.filter(x=>sec==="all"||x[0]===sec);',
-'function build(shuf){deck=inSec().filter(x=>!known.has(x[1]));if(shuf)deck.sort(()=>Math.random()-.5);flip=false;render()}',
-'function render(){const tot=inSec().length,left=deck.length;$("dir").textContent=rev?"UZ \u2192 EN":"EN \u2192 UZ";$("info").textContent="Qoldi: "+left+" \u00b7 Yodlandi: "+(tot-left)+"/"+tot;$("pb").style.width=(tot?(tot-left)/tot*100:0)+"%";const c=$("card");if(!left){c.className="card";c.textContent="Barakalla! Bu bo\u2018lim tugadi \ud83c\udf89";$("hint").textContent="Qayta boshlash uchun kartani bosing";return}const x=deck[0],f=rev?x[2]:x[1],b=rev?x[1]:x[2];c.className="card"+(flip?" back":"");c.textContent=flip?b:f;$("hint").textContent=flip?"Esladingizmi? Tanlang":"Aylantirish uchun kartani bosing"}',
+'function build(shuf){deck=inSec().filter(x=>!known.has(x[1]));if(shuf)deck.sort(()=>Math.random()-.5);di=0;flip=false;render()}',
+'function render(){const tot=inSec().length,left=deck.length;$("dir").textContent=rev?"UZ \u2192 EN":"EN \u2192 UZ";$("info").textContent="Qoldi: "+left+" \u00b7 Yodlandi: "+(tot-left)+"/"+tot;$("pb").style.width=(tot?(tot-left)/tot*100:0)+"%";const c=$("card");$("pos").textContent=left?(di+1)+" / "+left:"";if(!left){c.className="card";c.textContent="Barakalla! Bu bo\u2018lim tugadi \ud83c\udf89";$("hint").textContent="Qayta boshlash uchun kartani bosing";return}const x=deck[di],f=rev?x[2]:x[1],b=rev?x[1]:x[2];c.className="card"+(flip?" back":"");c.textContent=flip?b:f;$("hint").textContent=flip?"Esladingizmi? Tanlang":"Aylantirish uchun kartani bosing"}',
 '$("card").onclick=()=>{if(!deck.length){inSec().forEach(x=>known.delete(x[1]));save();build(true)}else{flip=!flip;render()}};',
-'$("know").onclick=()=>{if(!deck.length)return;known.add(deck.shift()[1]);save();flip=false;render()};',
-'$("again").onclick=()=>{if(!deck.length)return;deck.push(deck.shift());flip=false;render()};',
+'$("know").onclick=()=>{if(!deck.length)return;known.add(deck.splice(di,1)[0][1]);if(di>=deck.length)di=0;save();flip=false;render()};',
+'const step=d=>{if(deck.length<2)return;di=(di+d+deck.length)%deck.length;flip=false;render()};',
+'$("again").onclick=()=>step(1);$("next").onclick=()=>step(1);$("prev").onclick=()=>step(-1);',
+'document.onkeydown=e=>{if(e.key==="ArrowRight")step(1);else if(e.key==="ArrowLeft")step(-1)};',
+'let tx=0;$("card").ontouchstart=e=>{tx=e.touches[0].clientX};$("card").ontouchend=e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)step(dx<0?1:-1)};',
+'$("ord").onclick=()=>build(false);',
 '$("sec").onchange=e=>{sec=e.target.value;build(false)};',
 '$("dir").onclick=()=>{rev=!rev;flip=false;render()};',
 '$("sh").onclick=()=>build(true);',
 'build(false);'
 ].join('\n');
-const page='<!DOCTYPE html><html lang="uz"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>'+title+' \u2014 Flashcards</title><style>'+css+'</style></head><body><main><h1>'+title+' \u2014 flashcards</h1><div class="bar"><select id="sec"></select><button id="dir"></button><button id="sh">Aralashtirish</button></div><div class="info" id="info"></div><div class="pb"><i id="pb"></i></div><div class="card" id="card"></div><div class="hint" id="hint">Aylantirish uchun kartani bosing</div><div class="act"><button class="no" id="again">Yana takrorlayman</button><button class="ok" id="know">Bildim</button></div></main><scr'+'ipt>'+js+'</scr'+'ipt></body></html>';
+const page='<!DOCTYPE html><html lang="uz"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>'+title+' \u2014 Flashcards</title><style>'+css+'</style></head><body><main><h1>'+title+' \u2014 flashcards</h1><div class="bar"><select id="sec"></select><button id="dir"></button><button id="sh">Aralashtirish</button><button id="ord">Tartibda</button></div><div class="info" id="info"></div><div class="pb"><i id="pb"></i></div><div class="card" id="card"></div><div class="hint" id="hint">Aylantirish uchun kartani bosing</div><div class="nav"><button id="prev">\u25c0 Oldingi</button><span id="pos"></span><button id="next">Keyingi \u25b6</button></div><div class="act"><button class="no" id="again">Yana takrorlayman</button><button class="ok" id="know">Bildim</button></div></main><scr'+'ipt>'+js+'</scr'+'ipt></body></html>';
 const a=document.createElement('a');
 a.href=URL.createObjectURL(new Blob([page],{type:'text/html;charset=utf-8'}));
 const safe=(title||'flashcards').replace(/[^\w\u0400-\u04FF\s\-]/g,'').trim()||'flashcards';
@@ -2127,11 +2241,125 @@ setTimeout(function(){URL.revokeObjectURL(a.href)},2500);
 if(share){const d=S.vd.find(x=>x.id==i);shareFlashHtml(d||{n:title,w:[],c:''})}else toast('HTML yuklandi');
 }
 
+(function(){let sx=0,sy=0;
+document.addEventListener('touchstart',e=>{const c=e.target.closest&&e.target.closest('#vcard');if(!c||!e.touches[0])return;sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+document.addEventListener('touchend',e=>{if(!sx&&!sy)return;const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;sx=sy=0;if(Math.abs(dx)>50&&Math.abs(dy)<40&&vk&&tab==='vocab'){dx<0?vNext():vPrev()}},{passive:true});
+document.addEventListener('keydown',e=>{if(!vk||tab!=='vocab')return;if(/INPUT|TEXTAREA|SELECT/.test((document.activeElement||{}).tagName||''))return;if(e.key==='ArrowRight')vNext();else if(e.key==='ArrowLeft')vPrev()})})();
+
+/* ===== Drafts: unsent text survives re-renders, reloads and closing the app ===== */
+const DRK='intizomDrafts';
+function drGet(){try{return JSON.parse(localStorage.getItem(DRK)||'{}')||{}}catch(e){return{}}}
+function drSet(k,v){try{const d=drGet();if(v===''||v==null||(Array.isArray(v)&&!v.length))delete d[k];else d[k]=v;localStorage.setItem(DRK,JSON.stringify(d))}catch(e){}}
+['input','change'].forEach(ev=>document.addEventListener(ev,e=>{const t=e.target;if(t&&t.dataset&&t.dataset.dr)drSet(t.dataset.dr,t.value)},true));
+/* keep focus + caret in a draft field when the page re-renders under it */
+(function(){const d0=draw;draw=function(){const a=document.activeElement,id=a&&a.dataset&&a.dataset.dr&&a.id?a.id:null;let ss,se;if(id){try{ss=a.selectionStart;se=a.selectionEnd}catch(e){}}
+  d0.apply(this,arguments);if(id){const n=$(id);if(n&&n!==a){n.focus();try{n.setSelectionRange(ss,se)}catch(e){}}}}})();
+
+/* ===== Undo (5 s) ===== */
+var _undo=null,_undoT=0,_noU=0;
+function restoreSnap(snap){const o=JSON.parse(snap);Object.keys(S).forEach(k=>delete S[k]);Object.assign(S,o);save();draw();hdr()}
+function undoShow(label,fn){if(_noU)return;let b=$('undoBar');if(!b){b=document.createElement('div');b.id='undoBar';document.body.appendChild(b)}
+  _undo=fn;b.innerHTML='<span class="ul">'+E(label)+'</span><button onclick="undoRun()">↩ Nazad</button><i></i>';b.style.display='flex';
+  const i=b.querySelector('i');i.style.animation='none';void i.offsetWidth;i.style.animation='undoBar 5s linear forwards';
+  clearTimeout(_undoT);_undoT=setTimeout(undoHide,5000)}
+function undoHide(){const b=$('undoBar');if(b)b.style.display='none';_undo=null;clearTimeout(_undoT)}
+function undoRun(){const f=_undo;undoHide();if(f){try{f()}catch(e){console.warn(e)}toast('Nazad qaytarildi ↩')}}
+/* U(label, fn): run fn, remember how to take it back */
+function U(label,fn){if(_noU)return fn();const snap=JSON.stringify(S),r=fn();undoShow(typeof label==='function'?label():label,()=>restoreSnap(snap));return r}
+[['doneT',a=>{const t=S.tasks.find(x=>x.id==a[0]);return t&&t.done?'✓ Vazifa bajarildi':'Vazifa belgisi olib tashlandi'}],
+ ['doneH',a=>{const h=S.habits.find(x=>x.id==a[0]);return h&&h.last==ds()?'✓ Odat bajarildi':'Odat belgisi olib tashlandi'}],
+ ['negH',()=>'✗ Odat: qilmadim'],['penDone',()=>'✓ Jazo bajarildi']
+].forEach(([n,l])=>{const f=window[n];window[n]=function(){const a=arguments,self=this;return U(()=>l(a),()=>f.apply(self,a))}});
+(function(){const f=window.ciSet;window.ciSet=function(i,v){const prev=CI[i];f(i,v);undoShow(v===1?'✓ Qildim':'✗ Qilmadim',()=>f(i,prev))}})();
+(function(){const f=window.ciGo;window.ciGo=function(){_noU++;try{return f.apply(this,arguments)}finally{_noU--}}})();
+
+/* ===== Fix punishment ===== */
+function punPool(){if(!Array.isArray(S.pl))S.pl=PEN.map((t,i)=>({id:uid()+i,t}));return S.pl}
+function punCard(){const pl=punPool(),pp=(S.pen||[]).filter(p=>!p.d),dr=drGet();
+  return `<div class="card"><b>⚖️ Fix punishment</b><div class="sm" style="margin:4px 0 10px">Vazifa yoki odat bajarilmasa, shu ro‘yxatdan tasodifiy jazo beriladi. Matnda “vocab” so‘zi bo‘lsa, kunlik so‘z maqsadiga +50 qo‘shiladi.</div>
+<div class="row" style="gap:8px"><input id="plNew" data-dr="plnew" value="${E(dr.plnew||'')}" placeholder="Yangi jazo qo‘shish…" style="flex:1" onkeydown="if(event.key==='Enter')plAdd()"><button class="p" onclick="plAdd()">Qo‘shish</button></div>
+${pl.map(x=>`<div class="row" style="margin-top:8px;gap:8px"><input value="${E(x.t)}" style="flex:1" onchange="plEd('${x.id}',this.value)"><button onclick="plDel('${x.id}')" aria-label="O‘chirish">✕</button></div>`).join('')||'<div class="sm" style="margin-top:8px">Ro‘yxat bo‘sh — jazo berilmaydi.</div>'}
+<div class="g" style="margin-top:10px"><button onclick="plReset()">↺ Standart ro‘yxat</button><button onclick="plGive()">🎲 Tasodifiy jazo ber</button></div>
+<div class="sm" style="margin:14px 0 6px"><b>Hozirgi bajarilmagan jazolar (${pp.length})</b></div>
+<div class="row" style="gap:8px"><input id="penNew" data-dr="pennew" value="${E(dr.pennew||'')}" placeholder="Hozir o‘zingizga jazo bering…" style="flex:1" onkeydown="if(event.key==='Enter')penGive()"><button onclick="penGive()">Jazo ber</button></div>
+${pp.map(p=>`<div class="row" style="margin-top:8px;gap:8px"><input value="${E(p.t)}" style="flex:1" onchange="penEd('${p.id}',this.value)"><button onclick="penRm('${p.id}')" aria-label="O‘chirish">✕</button></div>`).join('')||'<div class="sm" style="margin-top:6px">Yo‘q 🎉</div>'}</div>`}
+function plAdd(){const el=$('plNew'),v=(el&&el.value||'').trim();if(!v)return toast('Jazo matnini yozing');punPool().push({id:uid(),t:v});drSet('plnew','');save();draw()}
+function plEd(id,v){v=v.trim();const x=punPool().find(z=>z.id===id);if(!x)return;if(!v){toast('Matn bo‘sh bo‘lmasin');draw();return}x.t=v;save();toast('Saqlandi')}
+function plDel(id){U('Jazo o‘chirildi',()=>{S.pl=punPool().filter(z=>z.id!==id);save();draw()})}
+function plReset(){if(!confirm('Jazolar ro‘yxati standart holatga qaytsinmi? Sizning jazolaringiz o‘chadi.'))return;U('Ro‘yxat tiklandi',()=>{S.pl=null;punPool();save();draw()})}
+function penAdd(t){S.pen=S.pen||[];const v=/vocab/i.test(t);S.pen.push({id:uid(),t,f:'Qo‘lda',d:0,v:v?1:0,src:'',sid:'',day:ds(),at:Date.now(),soul:0,soulHit:0});if(v)S.vx=(S.vx||0)+50}
+function plGive(){const pl=punPool();if(!pl.length)return toast('Ro‘yxat bo‘sh');U('Jazo berildi',()=>{penAdd(pl[Math.floor(Math.random()*pl.length)].t);save();draw()})}
+function penGive(){const el=$('penNew'),v=(el&&el.value||'').trim();if(!v)return toast('Jazo matnini yozing');U('Jazo berildi',()=>{penAdd(v);drSet('pennew','');save();draw()})}
+function penEd(id,v){v=v.trim();const p=(S.pen||[]).find(x=>x.id===id);if(!p)return;if(!v){draw();return}p.t=v;save();toast('Saqlandi')}
+function penRm(id){U('Jazo olib tashlandi',()=>{const p=(S.pen||[]).find(x=>x.id===id);if(p&&p.v)S.vx=Math.max(0,(S.vx||0)-50);S.pen=(S.pen||[]).filter(x=>x.id!==id);save();draw()})}
+
+/* ===== Achievements ===== */
+const ACH_DEFS=[
+ ['tasks','✅','Tasks done',[1,10,50,100,500],()=>S.tasks.filter(t=>t.done).length,'tasks completed'],
+ ['streak','🔥','Habit streak',[7,30,100,365],()=>Math.max(0,...S.habits.map(h=>h.streak||0)),'days in a row'],
+ ['chk','🗓️','Habit check-ins',[10,50,200,1000],()=>S.habits.reduce((a,h)=>a+(h.log||[]).length,0),'check-ins'],
+ ['focus','🍅','Deep focus',[60,300,1200,6000],()=>S.focus||0,'focus minutes'],
+ ['words','📚','Words learned',[25,100,500,2000],()=>(S.vd||[]).reduce((a,d)=>a+d.w.filter(x=>x[2]).length,0),'words learned'],
+ ['lvl','🛡️','Level',[3,5,10,20],()=>lvOf(S.pts),'level reached']];
+function achList(){const o=[];ACH_DEFS.forEach(d=>{const v=d[4]();d[3].forEach(t=>o.push({id:d[0]+t,ic:d[1],n:d[2]+' · '+t,desc:t+' '+d[5],v,t}))});return o}
+function checkAch(){const first=!S.ach;S.ach=S.ach||{};let ch=first;achList().forEach(a=>{if(a.v>=a.t&&!S.ach[a.id]){S.ach[a.id]=ds();ch=true;if(!first)toast('🏆 Achievement: '+a.n)}});if(ch)save()}
+(function(){const d0=draw;draw=function(){try{checkAch()}catch(e){}return d0.apply(this,arguments)}})();
+function vAch(){checkAch();const L=achList(),un=L.filter(a=>S.ach[a.id]),am=(S.am||[]).slice().sort((a,b)=>(b.d||'').localeCompare(a.d||''));
+  return `<div class="row" style="margin-bottom:12px"><button onclick="go('more')">← More</button><b class="sp" style="text-align:center">🏆 Achievements</b><span style="width:52px"></span></div>
+<div class="card"><div class="row"><b class="sp">${un.length} / ${L.length} ochilgan</b><span class="tag">${am.length} ta shaxsiy</span></div><div class="bar" style="margin-top:8px;height:8px"><i style="width:${L.length?un.length/L.length*100:0}%;background:var(--a)"></i></div></div>
+<h2>⭐ Mening yutuqlarim</h2>
+<div class="card"><input id="amT" data-dr="amt" value="${E(drGet().amt||'')}" placeholder="Yutuq (masalan: IELTS 7.0 oldim)" onkeydown="if(event.key==='Enter')amAdd()"><div class="row" style="margin:8px 0;gap:8px"><input id="amD" type="date" value="${ds()}" style="flex:0 0 150px"><input id="amN" data-dr="amn" value="${E(drGet().amn||'')}" placeholder="Izoh (ixtiyoriy)" style="flex:1"></div><button class="p" style="width:100%" onclick="amAdd()">Qo‘shish</button></div>
+${am.map(a=>`<div class="card"><div class="row" style="gap:8px"><span style="font-size:22px">🏆</span><input value="${E(a.t)}" style="flex:1" onchange="amEd('${a.id}','t',this.value)"><button onclick="amDel('${a.id}')" aria-label="O‘chirish">✕</button></div><div class="row" style="margin-top:8px;gap:8px"><input type="date" value="${E(a.d||'')}" style="flex:0 0 150px" onchange="amEd('${a.id}','d',this.value)"><input value="${E(a.n||'')}" placeholder="Izoh" style="flex:1" onchange="amEd('${a.id}','n',this.value)"></div></div>`).join('')||'<div class="sm" style="margin:4px 0 12px">Hali shaxsiy yutuq yo‘q. Yuqoridan qo‘shing.</div>'}
+<h2>🏅 Badges</h2>
+${L.slice().sort((a,b)=>(!!S.ach[b.id])-(!!S.ach[a.id])).map(a=>{const u=S.ach[a.id];return `<div class="card ach-it ${u?'':'lock'}"><div class="ach-ic">${a.ic}</div><div class="sp"><b>${E(a.n)}</b><div class="sm">${E(a.desc)}${u?' · '+u:''}</div>${u?'':`<div class="bar" style="margin-top:6px;height:6px"><i style="width:${Math.min(100,a.v/a.t*100)}%;background:var(--a)"></i></div><div class="sm" style="margin-top:2px">${Math.min(a.v,a.t)} / ${a.t}</div>`}</div>${u?'<span style="font-size:20px">✅</span>':''}</div>`}).join('')}`}
+function amAdd(){const t=($('amT')||{}).value.trim();if(!t)return toast('Yutuq nomini yozing');(S.am=S.am||[]).push({id:uid(),t,d:($('amD')||{}).value||ds(),n:($('amN')||{}).value.trim()});drSet('amt','');drSet('amn','');save();draw();toast('🏆 Yutuq qo‘shildi')}
+function amEd(id,k,v){const a=(S.am||[]).find(x=>x.id===id);if(!a)return;v=v.trim();if(k==='t'&&!v){draw();return}a[k]=v;save()}
+function amDel(id){U('Yutuq o‘chirildi',()=>{S.am=(S.am||[]).filter(x=>x.id!==id);save();draw()})}
+
+/* ===== Wishlist ===== */
+const WPR={1:['High','var(--r)'],2:['Medium','var(--o)'],3:['Low','var(--m)']};
+function vWl(){const L=S.wl||[],open=L.filter(x=>!x.done).sort((a,b)=>(a.pr||2)-(b.pr||2)||(a.at||0)-(b.at||0)),dn=L.filter(x=>x.done).sort((a,b)=>(b.doneAt||0)-(a.doneAt||0)),dr=drGet();
+  const row=x=>`<div class="card ${x.done?'wl-d':''}"><div class="row" style="gap:8px"><button class="${x.done?'p':''}" onclick="wlTog('${x.id}')" aria-label="Belgilash" style="min-width:44px">${x.done?'✓':'☐'}</button><div class="sp"><input value="${E(x.t)}" onchange="wlEd('${x.id}','t',this.value)"></div><button onclick="wlDel('${x.id}')" aria-label="O‘chirish">✕</button></div>
+<div class="row" style="margin-top:8px;gap:8px"><select onchange="wlEd('${x.id}','pr',this.value)" style="flex:0 0 108px">${[1,2,3].map(k=>`<option value="${k}" ${(x.pr||2)==k?'selected':''}>${WPR[k][0]}</option>`).join('')}</select><input type="number" inputmode="numeric" value="${x.a||''}" placeholder="Narx (UZS)" style="flex:0 0 120px" onchange="wlEd('${x.id}','a',this.value)"><input value="${E(x.note||'')}" placeholder="Izoh / link" style="flex:1" onchange="wlEd('${x.id}','note',this.value)"></div>${x.done&&x.doneAt?`<div class="sm" style="margin-top:6px">✨ Amalga oshdi: ${new Date(x.doneAt).toLocaleDateString()}</div>`:''}</div>`;
+  return `<div class="row" style="margin-bottom:12px"><button onclick="go('more')">← More</button><b class="sp" style="text-align:center">✨ Wishlist</b><span style="width:52px"></span></div>
+<div class="card"><div class="row"><b class="sp">${open.length} ta istak</b><span class="tag">${dn.length} ta amalga oshgan</span></div></div>
+<div class="card"><input id="wlT" data-dr="wlt" value="${E(dr.wlt||'')}" placeholder="Nima istaysiz? (masalan: yangi noutbuk, Dubay safari)" onkeydown="if(event.key==='Enter')wlAdd()"><div class="row" style="margin:8px 0;gap:8px"><select id="wlP" style="flex:0 0 108px">${[1,2,3].map(k=>`<option value="${k}" ${k==2?'selected':''}>${WPR[k][0]}</option>`).join('')}</select><input id="wlA" type="number" inputmode="numeric" placeholder="Narx (ixtiyoriy)" style="flex:0 0 130px"><input id="wlN" data-dr="wln" value="${E(dr.wln||'')}" placeholder="Izoh / link" style="flex:1"></div><button class="p" style="width:100%" onclick="wlAdd()">Istak qo‘shish</button></div>
+${open.map(row).join('')||'<div class="sm" style="margin:4px 0 12px">Istaklar ro‘yxati bo‘sh.</div>'}
+${dn.length?'<h2>✅ Amalga oshgan</h2>'+dn.map(row).join(''):''}`}
+function wlAdd(){const t=($('wlT')||{}).value.trim();if(!t)return toast('Istakni yozing');(S.wl=S.wl||[]).push({id:uid(),t,pr:+($('wlP')||{}).value||2,a:+($('wlA')||{}).value||0,note:($('wlN')||{}).value.trim(),at:Date.now(),done:0});drSet('wlt','');drSet('wln','');save();draw();toast('✨ Qo‘shildi')}
+function wlEd(id,k,v){const x=(S.wl||[]).find(z=>z.id===id);if(!x)return;if(k==='a')v=+v||0;else if(k==='pr'){v=+v||2}else v=String(v).trim();if(k==='t'&&!v){draw();return}x[k]=v;save();if(k==='pr')draw()}
+function wlTog(id){U(()=>{const x=(S.wl||[]).find(z=>z.id===id);return x&&x.done?'🌟 Istak amalga oshdi!':'Belgi olib tashlandi'},()=>{const x=(S.wl||[]).find(z=>z.id===id);if(!x)return;x.done=x.done?0:1;x.doneAt=x.done?Date.now():0;save();draw()})}
+function wlDel(id){U('Istak o‘chirildi',()=>{S.wl=(S.wl||[]).filter(z=>z.id!==id);save();draw()})}
+
+/* ===== My notes: file attachments (blobs live in IndexedDB on this device) ===== */
+const FDB={db:null,
+ open(){return new Promise((res,rej)=>{if(this.db)return res(this.db);const r=indexedDB.open('intizomFiles',1);r.onupgradeneeded=()=>r.result.createObjectStore('f');r.onsuccess=()=>{this.db=r.result;res(r.result)};r.onerror=()=>rej(r.error)})},
+ async tx(mode,fn){const db=await this.open();return new Promise((res,rej)=>{const t=db.transaction('f',mode),rq=fn(t.objectStore('f'));t.oncomplete=()=>res(rq&&rq.result);t.onerror=()=>rej(t.error);t.onabort=()=>rej(t.error)})},
+ put(id,v){return this.tx('readwrite',s=>s.put(v,id))},get(id){return this.tx('readonly',s=>s.get(id))},del(id){return this.tx('readwrite',s=>s.delete(id))}};
+var vStage=(drGet().vfiles)||[];const _fu={};
+const fico=t=>/^image\//.test(t)?'🖼️':/^audio\//.test(t)?'🎵':/^video\//.test(t)?'🎬':/pdf/.test(t)?'📕':/html/.test(t)?'🌐':'📄';
+function vFilesHtml(n){return (n.files||[]).map(f=>/^image\//.test(f.type)?`<img class="nf-img" data-fid="${f.id}" alt="${E(f.name)}" onclick="vFileOpen('${f.id}')">`:`<button class="nf-chip" onclick="vFileOpen('${f.id}')">${fico(f.type)} <span>${E(f.name)}</span> <span class="sm">${fsz(f.size)}</span></button>`).join('')}
+async function vFileUrl(id){if(_fu[id])return _fu[id];const b=await FDB.get(id);if(!b)return null;return _fu[id]=URL.createObjectURL(b)}
+function vHydrate(){document.querySelectorAll('img[data-fid]').forEach(async im=>{try{const u=await vFileUrl(im.dataset.fid);if(u)im.src=u;else im.replaceWith(Object.assign(document.createElement('div'),{className:'sm',textContent:'🖼️ '+im.alt+' — fayl bu qurilmada yo‘q'}))}catch(e){}})}
+async function vFileOpen(id){try{const b=await FDB.get(id);if(!b)return toast('Fayl bu qurilmada topilmadi');const u=await vFileUrl(id),a=document.createElement('a');a.href=u;
+  if(/^(image|audio|video)\//.test(b.type)||/pdf/.test(b.type))a.target='_blank';else a.download=b.name||'file';a.rel='noopener';document.body.appendChild(a);a.click();a.remove()}catch(e){toast('Faylni ochib bo‘lmadi')}}
+async function vNoteAttachFiles(fs){for(const f of fs){if(f.size>100*1048576){toast(f.name+' juda katta (100 MB dan oshmasin)');continue}
+  const id='f'+uid();try{await FDB.put(id,f)}catch(e){toast('Faylni saqlab bo‘lmadi: '+f.name);continue}
+  vStage.push({id,name:f.name||'rasm.png',type:f.type||'',size:f.size})}
+  drSet('vfiles',vStage);draw()}
+function vNoteAttach(inp){const fs=[...inp.files];inp.value='';if(fs.length)vNoteAttachFiles(fs)}
+function vStageRm(id){vStage=vStage.filter(f=>f.id!==id);drSet('vfiles',vStage);FDB.del(id).catch(()=>{});draw()}
+function vFilesGC(n){(n.files||[]).forEach(f=>setTimeout(()=>{if(!(S.vnotes||[]).some(x=>(x.files||[]).some(z=>z.id===f.id)))FDB.del(f.id).catch(()=>{})},6500))}
+function vNoteDel(i){U('Note o‘chirildi',()=>{const n=(S.vnotes||[])[i];if(!n)return;S.vnotes.splice(i,1);save();draw();vFilesGC(n)})}
+document.addEventListener('paste',e=>{if(e.target&&e.target.id==='vNoteIn'&&e.clipboardData&&e.clipboardData.files.length){e.preventDefault();vNoteAttachFiles([...e.clipboardData.files])}});
+document.addEventListener('dragover',e=>{if(e.target.closest&&e.target.closest('#vNotesBox'))e.preventDefault()});
+document.addEventListener('drop',e=>{const b=e.target.closest&&e.target.closest('#vNotesBox');if(b&&e.dataTransfer&&e.dataTransfer.files.length){e.preventDefault();vNoteAttachFiles([...e.dataTransfer.files])}});
+
 S.habits.forEach(normH);check();setInterval(check,60000);
 try{history.replaceState({tab:'tasks'},'',location.pathname)}catch(e){}
 window.addEventListener('popstate',function(e){
   const t=(e.state&&e.state.tab)||'tasks';
-  if(['tasks','habits','plan','timer','more','vocab','shadow','fin','settings'].includes(t)){
+  if(['tasks','habits','plan','timer','more','vocab','shadow','fin','settings','ach','wl'].includes(t)){
     go(t,true);
   }else{
     go('tasks',true);
